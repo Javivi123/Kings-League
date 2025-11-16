@@ -25,6 +25,27 @@ export default async function StandingsPage() {
     return "bg-white dark:bg-gray-800";
   };
 
+  const getSecondaryTextColor = (position: number) => {
+    if (position === 1) return "text-white/80";
+    if (position === 2) return "text-gray-700";
+    if (position === 3) return "text-white/80";
+    return "text-gray-600 dark:text-gray-400";
+  };
+
+  const getMedalColor = (position: number) => {
+    if (position === 1) return "text-yellow-300";
+    if (position === 2) return "text-gray-500";
+    if (position === 3) return "text-yellow-200";
+    return "";
+  };
+
+  const getPointsColor = (position: number) => {
+    if (position === 1) return "text-white";
+    if (position === 2) return "text-gold-kings";
+    if (position === 3) return "text-white";
+    return "text-gold-kings";
+  };
+
   return (
     <>
       <Navbar />
@@ -61,15 +82,7 @@ export default async function StandingsPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-2">
                           {index < 3 && (
-                            <Medal
-                              className={`h-5 w-5 ${
-                                index === 0
-                                  ? "text-gold-kings"
-                                  : index === 1
-                                  ? "text-gray-400"
-                                  : "text-orange-400"
-                              }`}
-                            />
+                            <Medal className={`h-5 w-5 ${getMedalColor(index + 1)}`} />
                           )}
                           <span className="font-bold">{index + 1}</span>
                         </div>
@@ -85,7 +98,7 @@ export default async function StandingsPage() {
                           )}
                           <div>
                             <div className="font-semibold">{team.name}</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className={`text-sm ${getSecondaryTextColor(index + 1)}`}>
                               {team.owner.name}
                             </div>
                           </div>
@@ -108,7 +121,7 @@ export default async function StandingsPage() {
                         {team.goalsFor - team.goalsAgainst}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        <span className="text-2xl font-bold text-gold-kings">
+                        <span className={`text-2xl font-bold ${getPointsColor(index + 1)}`}>
                           {team.points}
                         </span>
                       </td>

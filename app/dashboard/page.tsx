@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { prisma } from "@/lib/prisma";
 import { TrendingUp, TrendingDown, BarChart3, Users, Trophy, Euro } from "lucide-react";
 import { DashboardStats } from "@/components/dashboard/DashboardStats";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 
 async function getDashboardData(userId: string, role: string) {
   if (role === "presidente") {
@@ -103,9 +104,10 @@ export default async function DashboardPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center space-x-3 mb-8">
+      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8 relative overflow-hidden">
+        <FloatingIcons type="mixed" count={8} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center space-x-3 mb-8 animate-fade-in">
             <BarChart3 className="h-8 w-8 text-blue-kings" />
             <h1 className="text-4xl font-bold">Dashboard de Estadísticas</h1>
           </div>

@@ -7,12 +7,14 @@ declare module "next-auth" {
       email: string;
       name?: string | null;
       role: string;
+      hasSeenTutorial: boolean;
     };
   }
 
   interface User {
     id: string;
     role: string;
+    hasSeenTutorial: boolean;
   }
 }
 
@@ -20,6 +22,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     role: string;
+    hasSeenTutorial: boolean;
   }
 }
 

@@ -147,36 +147,30 @@ export default function SettingsPage() {
               </form>
             </div>
 
-            {/* TV Mode */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-              <div className="flex items-center space-x-2 mb-6">
-                <Tv className="h-6 w-6 text-gold-kings" />
-                <h2 className="text-2xl font-bold">Modo TV</h2>
-              </div>
+            {/* TV Mode - Solo visible para admin */}
+            {session?.user?.role === "admin" && (
+              <div className="bg-gradient-to-r from-purple-600 to-purple-800 rounded-2xl shadow-lg p-6 text-white">
+                <div className="flex items-center space-x-2 mb-6">
+                  <Tv className="h-6 w-6 text-yellow-300" />
+                  <h2 className="text-2xl font-bold">Modo TV / ChromeCast</h2>
+                </div>
 
-              <div className="flex items-center justify-between">
-                <div>
+                <div className="mb-6">
                   <h3 className="font-semibold text-lg mb-2">
-                    Activar Modo TV para ChromeCast
+                    Visualización para Pantallas Grandes
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Optimiza la visualización para pantallas grandes y TV
+                  <p className="text-white/80">
+                    Abre la vista especial para TV con carrusel automático de clasificación, partidos, noticias y jugadores destacados.
                   </p>
                 </div>
-                <button
-                  onClick={handleTvModeToggle}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                    tvMode ? "bg-blue-kings" : "bg-gray-300"
-                  }`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      tvMode ? "translate-x-6" : "translate-x-1"
-                    }`}
-                  />
-                </button>
+
+                <Link href="/tv">
+                  <Button className="w-full bg-white text-purple-800 hover:bg-gray-100 font-bold text-lg py-4">
+                    🖥️ Abrir Modo TV
+                  </Button>
+                </Link>
               </div>
-            </div>
+            )}
 
             {/* Security */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">

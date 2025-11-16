@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SearchBar } from "@/components/search/SearchBar";
 import { FilterPanel } from "@/components/filters/FilterPanel";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import { Users } from "lucide-react";
 import Link from "next/link";
 
@@ -107,8 +108,9 @@ export default function PlayersPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8 relative overflow-hidden">
+        <FloatingIcons type="stars" count={8} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
               <Users className="h-8 w-8 text-blue-kings" />

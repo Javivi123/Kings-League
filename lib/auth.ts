@@ -38,22 +38,43 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           name: user.name,
           role: user.role,
+          hasSeenTutorial: user.hasSeenTutorial,
         };
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.role = user.role;
         token.id = user.id;
+        token.hasSeenTutorial = user.hasSeenTutorial;
       }
+      
+      // Actualizar el token si se solicita una actualización
+      if (trigger === "update") {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+        });
+        if (dbUser) {
+          token.hasSeenTutorial = dbUser.hasSeenTutorial;
+        }
+      }
+      
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.role = token.role as string;
         session.user.id = token.id as string;
+        
+        // Siempre obtener el valor más reciente de hasSeenTutorial desde la BD
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { hasSeenTutorial: true },
+        });
+        
+        session.user.hasSeenTutorial = dbUser?.hasSeenTutorial ?? false;
       }
       return session;
     },

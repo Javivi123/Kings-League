@@ -10,7 +10,8 @@
     "db:studio": "prisma studio",
     "db:open": "./scripts/open-db.sh",
     "db:create-admin": "node scripts/create-admin.js",
-    "db:seed": "node scripts/seed-data.js"
+    "db:seed": "node scripts/seed-data.js",
+    "db:reset-tutorial": "node scripts/reset-tutorial.js"
   },
   "dependencies": {
     "next": "14.2.5",

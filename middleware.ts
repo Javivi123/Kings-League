@@ -61,6 +61,7 @@ export default withAuth(
           "/players",
           "/matches",
           "/news",
+          "/tv",
         ];
         
         const isPublicPath = publicPaths.some(

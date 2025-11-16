@@ -47,7 +47,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             {session && <NotificationBell />}
             {navigation.map((item) => {
               const Icon = item.icon;
@@ -57,7 +57,7 @@ export function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex items-center space-x-1 px-4 py-2 rounded-lg transition-colors",
+                    "flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors whitespace-nowrap text-sm",
                     isActive
                       ? "bg-blue-kings text-white"
                       : "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -71,15 +71,15 @@ export function Navbar() {
             {session ? (
               <button
                 onClick={() => signOut()}
-                className="flex items-center space-x-1 px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
+                className="flex items-center space-x-1 px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors whitespace-nowrap text-sm"
               >
                 <LogOut className="h-4 w-4" />
-                <span>Cerrar Sesión</span>
+                <span>Salir</span>
               </button>
             ) : (
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-lg bg-blue-kings hover:bg-blue-dark transition-colors"
+                className="px-3 py-2 rounded-lg bg-blue-kings hover:bg-blue-dark transition-colors text-sm whitespace-nowrap"
               >
                 Iniciar Sesión
               </Link>
@@ -88,7 +88,8 @@ export function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden flex items-center space-x-2">
+            {session && <NotificationBell />}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-gray-300 hover:bg-gray-800"
@@ -105,13 +106,8 @@ export function Navbar() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="md:hidden border-t border-gray-800">
+            <div className="lg:hidden border-t border-gray-800">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {session && (
-                  <div className="px-3 py-2">
-                    <NotificationBell />
-                  </div>
-                )}
                 {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;

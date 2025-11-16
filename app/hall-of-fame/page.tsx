@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { prisma } from "@/lib/prisma";
 import { Trophy, Crown, Star, Medal } from "lucide-react";
+import { FloatingIcons } from "@/components/ui/FloatingIcons";
 import Link from "next/link";
 
 async function getHallOfFame() {
@@ -58,14 +59,15 @@ export default async function HallOfFamePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Crown className="h-16 w-16 text-gold-kings mx-auto mb-4" />
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-gold-kings to-gold-dark bg-clip-text text-transparent">
+      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8 relative overflow-hidden">
+        <FloatingIcons type="trophies" count={10} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 animate-fade-in">
+            <Crown className="h-16 w-16 text-gold-kings mx-auto mb-4 animate-pulse" />
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-gold-kings to-gold-dark bg-clip-text text-transparent leading-tight">
               Hall of Fame
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
+            <p className="text-xl text-gray-700 dark:text-gray-300">
               Los mejores de todos los tiempos
             </p>
           </div>
