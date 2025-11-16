@@ -34,15 +34,18 @@ Si aparece un error, Node.js no está instalado o no está en el PATH.
 ### Paso 1: Abrir el Proyecto
 
 1. **Extrae o copia** la carpeta del proyecto a tu escritorio o donde prefieras
-2. Abre **PowerShell** o **CMD** en esa carpeta:
-   - **Opción A:** Navega con `cd`:
+2. **IMPORTANTE:** Asegúrate de estar en la carpeta correcta antes de continuar
+3. Abre **PowerShell** o **CMD** en esa carpeta:
+   - **Opción A (Recomendada):** Abre PowerShell directamente en la carpeta:
+     - Navega a la carpeta en el **Explorador de Windows**
+     - Haz clic derecho en la carpeta (no en un archivo, sino en espacio vacío)
+     - Selecciona **"Abrir en Terminal"** o **"Abrir PowerShell aquí"**
+     - Esto garantiza que estás en la carpeta correcta
+   - **Opción B:** Navega con `cd`:
      ```powershell
-     cd "C:\Users\TuUsuario\Desktop\Kings League"
+     cd "C:\Users\TuUsuario\Desktop\new\Kings League"
+     # O la ruta donde tengas el proyecto
      ```
-   - **Opción B:** Abre PowerShell en la carpeta:
-     - Navega a la carpeta en el Explorador de Windows
-     - Haz clic derecho en la carpeta
-     - Selecciona "Abrir en Terminal" o "Abrir PowerShell aquí"
 
 ### Paso 2: Instalar Dependencias
 
@@ -299,10 +302,19 @@ npm install
 # Verificar que estás en la carpeta del proyecto
 pwd
 # Debe mostrar la ruta que termina en "Kings League"
+
 # Verificar que existe package.json
 Test-Path package.json
 # Debe devolver: True
 ```
+
+**Si devuelve `False`:**
+- 📖 **Ver guía completa:** [`VERIFICAR_UBICACION.md`](./VERIFICAR_UBICACION.md)
+- O sigue estos pasos rápidos:
+  1. Abre el **Explorador de Windows**
+  2. Navega a la carpeta del proyecto manualmente
+  3. Haz clic derecho en la carpeta → **"Abrir en Terminal"**
+  4. Esto te pondrá automáticamente en la carpeta correcta
 
 **Solución 2: Limpiar caché de npm**
 ```powershell
