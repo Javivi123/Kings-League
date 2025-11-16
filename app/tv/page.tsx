@@ -8,9 +8,11 @@ import { es } from "date-fns/locale";
 
 // Función para limpiar HTML y obtener solo texto
 const stripHtml = (html: string): string => {
+  if (typeof window === 'undefined') return html; // SSR safety
   const tmp = document.createElement("DIV");
   tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
+  const text = tmp.textContent || tmp.innerText || "";
+  return text.replace(/\s+/g, ' ').trim(); // Limpiar espacios múltiples
 };
 
 interface Team {
@@ -67,6 +69,43 @@ export default function TVModePage() {
   const [loading, setLoading] = useState(true);
 
   const slides = ['standings', 'nextMatch', 'news', 'topPlayer', 'mvp'];
+
+  // Generar posiciones estables para las partículas (solo una vez)
+  const particlePositions = useState(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 3,
+      duration: 3 + Math.random() * 4,
+      size: i % 3 === 0 ? 'w-3 h-3' : i % 3 === 1 ? 'w-2 h-2' : 'w-4 h-4',
+      color: i % 3 === 0 ? 'bg-gold-kings/20' : i % 3 === 1 ? 'bg-blue-kings/20' : 'bg-red-kings/20',
+    }))
+  )[0];
+
+  const shapePositions = useState(() =>
+    Array.from({ length: 8 }, (_, i) => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: 5 + Math.random() * 5,
+      rotation: Math.random() * 360,
+      size: i % 2 === 0 ? 'w-16 h-16' : 'w-12 h-12',
+      style: i % 4 === 0 ? 'border-gold-kings/10 rounded-full' : 
+             i % 4 === 1 ? 'border-blue-kings/10 rotate-45' :
+             i % 4 === 2 ? 'border-red-kings/10 rounded-lg' : 'border-gold-kings/10',
+    }))
+  )[0];
+
+  const linePositions = useState(() =>
+    Array.from({ length: 6 }, (_, i) => ({
+      left: 10 + i * 15,
+      top: Math.random() * 100,
+      delay: i * 0.5,
+      color: i % 3 === 0 ? 'rgba(245, 158, 11, 0.1)' : 
+             i % 3 === 1 ? 'rgba(37, 99, 235, 0.1)' : 
+             'rgba(220, 38, 38, 0.1)',
+    }))
+  )[0];
 
   useEffect(() => {
     fetchData();
@@ -137,6 +176,59 @@ export default function TVModePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black-kings via-gray-900 to-black-kings text-white relative overflow-hidden">
+      {/* Elementos animados de fondo */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {/* Partículas flotantes */}
+        {particlePositions.map((particle, i) => (
+          <div
+            key={`particle-${i}`}
+            className="absolute animate-float"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              animationDelay: `${particle.delay}s`,
+              animationDuration: `${particle.duration}s`,
+            }}
+          >
+            <div className={`rounded-full ${particle.size} ${particle.color}`} />
+          </div>
+        ))}
+
+        {/* Formas geométricas flotantes */}
+        {shapePositions.map((shape, i) => (
+          <div
+            key={`shape-${i}`}
+            className="absolute animate-float"
+            style={{
+              left: `${shape.left}%`,
+              top: `${shape.top}%`,
+              animationDelay: `${shape.delay}s`,
+              animationDuration: `${shape.duration}s`,
+              transform: `rotate(${shape.rotation}deg)`,
+            }}
+          >
+            <div className={`${shape.size} border-2 ${shape.style}`} />
+          </div>
+        ))}
+
+        {/* Líneas decorativas */}
+        {linePositions.map((line, i) => (
+          <div
+            key={`line-${i}`}
+            className="absolute animate-pulse"
+            style={{
+              left: `${line.left}%`,
+              top: `${line.top}%`,
+              width: '2px',
+              height: '200px',
+              background: `linear-gradient(to bottom, transparent, ${line.color}, transparent)`,
+              animationDelay: `${line.delay}s`,
+              animationDuration: '4s',
+            }}
+          />
+        ))}
+      </div>
+
       {/* Botón de salir - pequeño y discreto */}
       <button
         onClick={exitTVMode}
@@ -170,7 +262,7 @@ export default function TVModePage() {
       </div>
 
       {/* Carrusel de contenido */}
-      <div className="h-screen flex items-center justify-center p-12">
+      <div className="h-screen flex items-center justify-center p-12 relative z-10">
         <div className="w-full max-w-7xl animate-fade-in">
           {/* Slide 1: Clasificación */}
           {currentSlide === 0 && (
@@ -364,48 +456,54 @@ export default function TVModePage() {
           {/* Slide 5: MVP */}
           {currentSlide === 4 && (
             mvpPlayer ? (
-            <div className="text-center space-y-8">
-              <div>
-                <Star className="h-20 w-20 text-gold-kings mx-auto mb-6 animate-bounce" />
-                <h1 className="text-7xl font-bold mb-8 text-gold-kings">Jugador MVP</h1>
-                <p className="text-3xl text-gray-400">Más Veces MVP del Partido</p>
+            <div className="w-full">
+              {/* Header */}
+              <div className="text-center mb-8">
+                <Star className="h-16 w-16 text-gold-kings mx-auto mb-4 animate-bounce" />
+                <h1 className="text-6xl font-bold mb-2 text-gold-kings">Jugador MVP</h1>
+                <p className="text-2xl text-gray-400">Más Veces MVP del Partido</p>
               </div>
 
-              <div className="mt-12">
-                {mvpPlayer.photo ? (
-                  <img
-                    src={mvpPlayer.photo}
-                    alt={mvpPlayer.name}
-                    className="h-64 w-64 mx-auto rounded-full object-cover border-8 border-gold-kings shadow-2xl mb-8"
-                  />
-                ) : (
-                  <div className="h-64 w-64 mx-auto rounded-full bg-gold-kings flex items-center justify-center text-9xl font-bold border-8 border-white shadow-2xl mb-8">
-                    {mvpPlayer.name.charAt(0)}
-                  </div>
-                )}
-
-                <h2 className="text-7xl font-bold mb-4">{mvpPlayer.name}</h2>
-                <p className="text-4xl text-gray-300 mb-8">
-                  {mvpPlayer.position} - {mvpPlayer.team?.name || 'Sin equipo'}
-                </p>
-
-                <div className="bg-gradient-to-r from-gold-kings to-gold-dark rounded-3xl p-12 max-w-2xl mx-auto mt-12">
-                  <div className="text-9xl font-bold mb-4">{mvpPlayer.stats?.mvpCount || 0}</div>
-                  <div className="text-4xl">Veces MVP del Partido</div>
+              {/* Contenido horizontal */}
+              <div className="flex items-center justify-center space-x-12">
+                {/* Columna izquierda: Foto y nombre */}
+                <div className="flex flex-col items-center">
+                  {mvpPlayer.photo ? (
+                    <img
+                      src={mvpPlayer.photo}
+                      alt={mvpPlayer.name}
+                      className="h-48 w-48 rounded-full object-cover border-8 border-gold-kings shadow-2xl mb-4"
+                    />
+                  ) : (
+                    <div className="h-48 w-48 rounded-full bg-gold-kings flex items-center justify-center text-7xl font-bold border-8 border-white shadow-2xl mb-4">
+                      {mvpPlayer.name.charAt(0)}
+                    </div>
+                  )}
+                  <h2 className="text-5xl font-bold mb-2">{mvpPlayer.name}</h2>
+                  <p className="text-2xl text-gray-300">
+                    {mvpPlayer.position} - {mvpPlayer.team?.name || 'Sin equipo'}
+                  </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto mt-12">
-                  <div className="bg-gray-800 rounded-2xl p-8">
-                    <div className="text-6xl font-bold text-green-500">{mvpPlayer.stats?.goals || 0}</div>
-                    <div className="text-2xl text-gray-400 mt-2">Goles</div>
+                {/* Columna central: MVP Count destacado */}
+                <div className="bg-gradient-to-r from-gold-kings to-gold-dark rounded-3xl p-8 min-w-[300px]">
+                  <div className="text-8xl font-bold mb-2 text-center">{mvpPlayer.stats?.mvpCount || 0}</div>
+                  <div className="text-3xl text-center">Veces MVP</div>
+                </div>
+
+                {/* Columna derecha: Estadísticas */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-gray-800 rounded-2xl p-6 min-w-[200px]">
+                    <div className="text-5xl font-bold text-green-500 text-center">{mvpPlayer.stats?.goals || 0}</div>
+                    <div className="text-xl text-gray-400 mt-1 text-center">Goles</div>
                   </div>
-                  <div className="bg-gray-800 rounded-2xl p-8">
-                    <div className="text-6xl font-bold text-blue-500">{mvpPlayer.stats?.assists || 0}</div>
-                    <div className="text-2xl text-gray-400 mt-2">Asistencias</div>
+                  <div className="bg-gray-800 rounded-2xl p-6 min-w-[200px]">
+                    <div className="text-5xl font-bold text-blue-500 text-center">{mvpPlayer.stats?.assists || 0}</div>
+                    <div className="text-xl text-gray-400 mt-1 text-center">Asistencias</div>
                   </div>
-                  <div className="bg-gray-800 rounded-2xl p-8">
-                    <div className="text-6xl font-bold text-gold-kings">{mvpPlayer.stats?.points || 0}</div>
-                    <div className="text-2xl text-gray-400 mt-2">Puntos</div>
+                  <div className="bg-gray-800 rounded-2xl p-6 min-w-[200px]">
+                    <div className="text-5xl font-bold text-gold-kings text-center">{mvpPlayer.stats?.points || 0}</div>
+                    <div className="text-xl text-gray-400 mt-1 text-center">Puntos</div>
                   </div>
                 </div>
               </div>

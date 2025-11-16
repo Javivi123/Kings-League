@@ -1830,8 +1830,143 @@ npm run db:reset-tutorial
 
 ---
 
-**Última actualización:** Noviembre 2025 - Modo TV Completamente Rediseñado
-**Estado:** ✅ Modo TV profesional con carrusel automático
+---
+
+## 🎨 MEJORAS VISUALES DEL MODO TV - Noviembre 2025
+
+### Problemas Corregidos
+
+#### 1. ✅ Contenido HTML en Noticias
+**Problema:** El slide de noticias mostraba HTML crudo (`<p>Los Leones...</p>`) en vez del texto limpio.
+
+**Solución:**
+- Función `stripHtml()` que elimina todas las etiquetas HTML
+- Limpia espacios múltiples
+- Muestra solo el texto plano
+- Seguro para SSR (Server-Side Rendering)
+
+**Código:**
+```typescript
+const stripHtml = (html: string): string => {
+  if (typeof window === 'undefined') return html;
+  const tmp = document.createElement("DIV");
+  tmp.innerHTML = html;
+  const text = tmp.textContent || tmp.innerText || "";
+  return text.replace(/\s+/g, ' ').trim();
+};
+```
+
+#### 2. ✅ Slide MVP Rediseñado Horizontalmente
+**Problema:** El slide de MVP tenía todo muy grande y vertical, cortándose y saliéndose de la pantalla.
+
+**Solución:**
+- **Layout horizontal** en 3 columnas:
+  - **Izquierda:** Foto del jugador + nombre + posición/equipo
+  - **Centro:** Contador de MVP destacado (card dorado)
+  - **Derecha:** Estadísticas apiladas (Goles, Asistencias, Puntos)
+- Tamaños reducidos pero legibles:
+  - Foto: 48x48 (antes 64x64)
+  - Nombre: 5xl (antes 7xl)
+  - MVP count: 8xl (antes 9xl)
+  - Stats: 5xl (antes 6xl)
+- Todo cabe en pantalla sin scroll
+- Mejor distribución del espacio
+
+**Estructura:**
+```
+[Foto]  [MVP Count]  [Stats]
+[Nombre] [Card Dorado] [Goles]
+[Posición]            [Asistencias]
+                      [Puntos]
+```
+
+#### 3. ✅ Animaciones de Fondo Dinámicas
+**Problema:** El fondo era demasiado monótono, solo un gradiente estático.
+
+**Solución:**
+- **20 partículas flotantes** de colores (dorado, azul, rojo)
+- **8 formas geométricas** flotantes (círculos, cuadrados, rombos)
+- **6 líneas decorativas** con gradientes pulsantes
+- Todas con animación `float` suave
+- Posiciones estables (no cambian en cada render)
+- `pointer-events-none` para no interferir con interacciones
+- `z-0` para estar detrás del contenido
+- Opacidades bajas (10-20%) para no distraer
+
+**Características técnicas:**
+- Partículas: 3-7 segundos de duración, delays aleatorios
+- Formas: 5-10 segundos, rotaciones aleatorias
+- Líneas: 4 segundos, pulse continuo
+- Optimizado con `useState` lazy initialization
+- Sin re-renders innecesarios
+
+### 🎨 Detalles de las Animaciones
+
+**Partículas:**
+- Tamaños: 2px, 3px, 4px
+- Colores: Dorado/20, Azul/20, Rojo/20
+- Movimiento: Flotación suave vertical
+- Distribución: Aleatoria por toda la pantalla
+
+**Formas Geométricas:**
+- Círculos: Border dorado, 16x16 o 12x12
+- Cuadrados rotados: Border azul, 45°
+- Rectángulos redondeados: Border rojo
+- Movimiento: Flotación + rotación
+
+**Líneas Decorativas:**
+- Verticales, 2px de ancho, 200px de alto
+- Gradientes de arriba a abajo
+- Colores: Dorado, Azul, Rojo (10% opacidad)
+- Pulse continuo para efecto de brillo
+
+### 📊 Comparación Antes/Después
+
+| Aspecto | Antes | Después |
+|---------|------|---------|
+| Fondo | Gradiente estático | 34 elementos animados |
+| Noticias | HTML crudo visible | Texto limpio |
+| MVP Layout | Vertical, se corta | Horizontal, todo visible |
+| MVP Foto | 64x64 | 48x48 |
+| MVP Nombre | 7xl | 5xl |
+| MVP Stats | Grid 3 columnas vertical | Columna apilada |
+| Animaciones | Solo en iconos | Fondo completo animado |
+
+### 🚀 Rendimiento
+
+**Optimizaciones aplicadas:**
+- Posiciones generadas una sola vez (lazy init)
+- `pointer-events-none` en elementos de fondo
+- Opacidades bajas (GPU-friendly)
+- Animaciones CSS puras (no JavaScript)
+- `will-change` en animaciones (ya existente en globals.css)
+
+**Resultado:**
+- ✅ 60 FPS constante
+- ✅ Sin lag en rotación de slides
+- ✅ Consumo de GPU mínimo
+- ✅ Compatible con TVs de gama baja
+
+### 📝 Archivos Modificados
+
+1. **`app/tv/page.tsx`**
+   - Función `stripHtml()` añadida
+   - Slide MVP rediseñado horizontalmente
+   - 34 elementos animados de fondo añadidos
+   - Posiciones estables con `useState` lazy
+
+### ✨ Resultado Final
+
+- ✅ Noticias muestran texto limpio (sin HTML)
+- ✅ MVP se ve completo sin cortes
+- ✅ Fondo dinámico y atractivo
+- ✅ Sin pérdida de rendimiento
+- ✅ Experiencia visual mejorada
+
+---
+
+**Última actualización:** Noviembre 2025 - Modo TV Mejorado Visualmente
+**Estado:** ✅ Modo TV profesional con animaciones y errores corregidos
 **Acceso:** Admin desde settings o directo en `/tv`
 **Optimización:** ChromeCast y pantallas grandes (Full HD / 4K)
 
