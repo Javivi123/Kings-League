@@ -2134,3 +2134,26 @@ El Modo TV ahora es:
 
 **🎉 Sesión completada exitosamente**
 
+---
+
+## 📖 Documentación Adicional Creada
+
+### SETUP_WINDOWS.md
+- ✅ Guía completa para ejecutar el proyecto en Windows
+- ✅ Instrucciones paso a paso con PowerShell/CMD
+- ✅ Solución de problemas comunes en Windows
+- ✅ Checklist de verificación
+- ✅ Comandos adaptados para Windows
+
+**Ubicación:** `/SETUP_WINDOWS.md`
+
+**Contenido:**
+- Requisitos previos (Node.js)
+- Instalación paso a paso
+- Creación manual del archivo .env
+- Comandos específicos para Windows
+- Troubleshooting completo
+- Resumen rápido (copy-paste)
+
+**Última actualización:** Noviembre 2025 - Preparación para demo en Windows
+

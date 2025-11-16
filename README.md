@@ -33,6 +33,7 @@ Aplicación de fantasy league para la Kings League del colegio.
 
 ## 📦 Instalación
 
+### Para Mac/Linux:
 ```bash
 # 1. Instalar dependencias
 npm install
@@ -54,6 +55,19 @@ npx prisma migrate dev --name init
 # 6. (Opcional) Abrir Prisma Studio para ver la base de datos
 npx prisma studio
 ```
+
+### Para Windows:
+📖 **Ver guía completa:** [`SETUP_WINDOWS.md`](./SETUP_WINDOWS.md)
+
+**Resumen rápido:**
+1. Instalar Node.js desde https://nodejs.org/
+2. Abrir PowerShell en la carpeta del proyecto
+3. Ejecutar: `npm install`
+4. Crear archivo `.env` manualmente (ver SETUP_WINDOWS.md)
+5. Ejecutar: `npx prisma generate`
+6. Ejecutar: `npx prisma migrate dev --name init`
+7. Ejecutar: `npm run db:create-admin`
+8. Ejecutar: `npm run dev`
 
 ## 🚀 Desarrollo
 
