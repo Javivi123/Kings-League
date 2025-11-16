@@ -77,25 +77,45 @@ npm install
 
 Necesitas crear un archivo llamado `.env` en la raíz del proyecto.
 
-**Opción A: Desde PowerShell**
+**Opción A: Desde PowerShell (Recomendado - Más Rápido)**
 ```powershell
-New-Item -Path .env -ItemType File
-notepad .env
+# Crear el archivo .env con el contenido necesario
+@"
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="kings-league-secret-key-2025-javier-sanchez"
+"@ | Out-File -FilePath .env -Encoding utf8
+
+# Verificar que se creó correctamente
+Test-Path .env
+# Debe devolver: True
+
+# Ver el contenido (opcional)
+Get-Content .env
 ```
 
-**Opción B: Manualmente**
-1. Abre el Bloc de notas (Notepad)
-2. Copia y pega este contenido:
+**Opción B: Crear y editar manualmente**
+```powershell
+# Crear el archivo vacío
+New-Item -Path .env -ItemType File
 
+# Abrir en el Bloc de notas para editarlo
+notepad .env
+```
+Luego copia y pega este contenido en el Bloc de notas:
 ```env
 DATABASE_URL="file:./dev.db"
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="kings-league-secret-key-2025-javier-sanchez"
 ```
+Guarda el archivo (Ctrl+S) y cierra el Bloc de notas.
 
-3. Guarda el archivo como `.env` (sin extensión `.txt`)
-   - En "Guardar como", selecciona "Todos los archivos" en el tipo
-   - El nombre debe ser exactamente: `.env`
+**Opción C: Usando echo (Método alternativo)**
+```powershell
+echo 'DATABASE_URL="file:./dev.db"' > .env
+echo 'NEXTAUTH_URL="http://localhost:3000"' >> .env
+echo 'NEXTAUTH_SECRET="kings-league-secret-key-2025-javier-sanchez"' >> .env
+```
 
 ### Paso 4: Generar Cliente de Prisma
 
