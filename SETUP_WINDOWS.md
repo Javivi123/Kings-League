@@ -288,7 +288,11 @@ npm install
 
 ### ❌ "npm install" da errores de "no encuentra archivos"
 
-**Problema:** Puede ser por varias razones. Prueba estas soluciones:
+**Problema:** Puede ser por varias razones. 
+
+📖 **Ver guía completa:** [`SOLUCION_NPM_INSTALL_WINDOWS.md`](./SOLUCION_NPM_INSTALL_WINDOWS.md)
+
+**Solución rápida:**
 
 **Solución 1: Verificar que estás en el directorio correcto**
 ```powershell
@@ -345,6 +349,8 @@ npm --version
 ```
 - Node.js debe ser versión 18 o superior
 - Si es muy antigua, actualiza desde https://nodejs.org/
+
+**💡 Si el problema persiste:** Consulta la guía completa en `SOLUCION_NPM_INSTALL_WINDOWS.md` que tiene soluciones paso a paso para cada tipo de error específico.
 
 ---
 
