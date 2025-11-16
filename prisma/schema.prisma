@@ -1,0 +1,293 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // Cambiar a "postgresql" para producción
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  age       Int?
+  password  String
+  role      String   @default("alumno") // "alumno", "jugador", "presidente", "admin"
+  avatar    String?  // URL de la imagen de perfil
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  team      Team?
+  player    Player?
+  news      News[]
+  requests  Request[]
+  achievements UserAchievement[]
+  
+  @@map("users")
+}
+
+model Team {
+  id          String   @id @default(cuid())
+  name        String
+  logo        String?  // URL del logo del equipo
+  ownerId     String   @unique
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  eurosKings Float    @default(1000.0) // Dinero inicial
+  points      Int      @default(0) // Puntos en la clasificación
+  wins        Int      @default(0)
+  draws       Int      @default(0)
+  losses      Int      @default(0)
+  goalsFor    Int      @default(0)
+  goalsAgainst Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  players     Player[]
+  matchesHome Match[]  @relation("HomeTeam")
+  matchesAway Match[]  @relation("AwayTeam")
+  transfers   Transfer[] @relation("FromTeam")
+  transfersTo Transfer[] @relation("ToTeam")
+  wildcards   Wildcard[]
+  transactions Transaction[]
+  auctions    Auction[]
+  investments Investment[]
+  
+  @@map("teams")
+}
+
+model Player {
+  id            String   @id @default(cuid())
+  name          String
+  position      String   // "GK", "DEF", "MID", "FWD"
+  price         Float    @default(0.0)
+  marketValue   Float    @default(0.0) // Valor de mercado actual
+  teamId        String?
+  team          Team?    @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  userId        String?  @unique // Si el jugador tiene cuenta de usuario
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  isAvailable   Boolean  @default(true)
+  isOnMarket    Boolean  @default(false) // Si está en el mercado de transferencias
+  photo         String?  // URL de la foto del jugador
+  age           Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  stats         PlayerStats?
+  transfers     Transfer[]
+  investments   Investment[] // Dinero invertido en este jugador
+  auctions      Auction[]
+  suspensions   Suspension[]
+  
+  @@map("players")
+}
+
+model PlayerStats {
+  id        String   @id @default(cuid())
+  playerId  String   @unique
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  goals     Int      @default(0)
+  assists   Int      @default(0)
+  matches   Int      @default(0)
+  points    Int      @default(0) // Puntos fantasy
+  yellowCards Int    @default(0)
+  redCards  Int      @default(0)
+  mvpCount  Int      @default(0) // Veces que ha sido MVP
+  
+  @@map("player_stats")
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  homeTeamId  String
+  homeTeam    Team     @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeamId  String
+  awayTeam    Team     @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  homeScore   Int?
+  awayScore   Int?
+  matchDate   DateTime
+  status      String   @default("scheduled") // "scheduled", "live", "finished"
+  mvpId       String?  // ID del jugador MVP del partido
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("matches")
+}
+
+model Transfer {
+  id          String   @id @default(cuid())
+  fromTeamId  String?
+  fromTeam    Team?    @relation("FromTeam", fields: [fromTeamId], references: [id])
+  toTeamId    String
+  toTeam      Team     @relation("ToTeam", fields: [toTeamId], references: [id])
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id])
+  price       Float
+  status      String   @default("pending") // "pending", "accepted", "rejected", "reviewing"
+  reviewedBy  String?  // ID del admin que revisó
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("transfers")
+}
+
+model Wildcard {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  effect      String   // Descripción del efecto
+  price       Float
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  used        Boolean  @default(false)
+  usedInMatchId String? // ID del partido donde se usó
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("wildcards")
+}
+
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  image       String?
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("news")
+}
+
+model Auction {
+  id          String   @id @default(cuid())
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id])
+  teamId      String?  // Equipo que ofrece al jugador
+  team        Team?    @relation(fields: [teamId], references: [id])
+  startingPrice Float
+  currentBid  Float?
+  currentBidderId String? // ID del equipo que tiene la puja más alta
+  status      String   @default("active") // "active", "closed", "sold"
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("auctions")
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
+  type        String   // "transfer", "wildcard", "investment"
+  amount      Float
+  description String
+  status      String   @default("pending") // "pending", "approved", "rejected"
+  reviewedBy  String?  // ID del admin que revisó
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("transactions")
+}
+
+model Investment {
+  id          String   @id @default(cuid())
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  amount      Float
+  createdAt   DateTime @default(now())
+  
+  @@map("investments")
+}
+
+model Request {
+  id          String   @id @default(cuid())
+  type        String   // "wildcard", "team_registration", etc.
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  teamId      String?  // Si la solicitud es de un equipo
+  data        String?  // JSON con datos adicionales
+  status      String   @default("pending") // "pending", "approved", "rejected"
+  reviewedBy  String?  // ID del admin que revisó
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("requests")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        String   // "match", "meeting", "auction"
+  date        DateTime
+  location    String?
+  participants String? // JSON con IDs de participantes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("events")
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  icon        String?  // Emoji o URL de icono
+  category    String   // "goals", "wins", "points", etc.
+  requirement Float    // Valor requerido para obtenerlo
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  userAchievements UserAchievement[]
+  
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  unlockedAt    DateTime @default(now())
+  
+  @@unique([userId, achievementId])
+  @@map("user_achievements")
+}
+
+model Suspension {
+  id          String   @id @default(cuid())
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  reason      String
+  matches     Int      // Número de partidos suspendido
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("suspensions")
+}
+
+model SeasonAward {
+  id          String   @id @default(cuid())
+  season      String   // "2024-2025"
+  category    String   // "best_player", "best_team", "top_scorer", etc.
+  winnerId    String?  // ID del ganador (puede ser player, team, user)
+  winnerType  String?  // "player", "team", "user"
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("season_awards")
+}
+
