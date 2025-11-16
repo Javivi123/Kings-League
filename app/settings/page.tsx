@@ -165,8 +165,9 @@ export default function SettingsPage() {
                 </div>
 
                 <Link href="/tv">
-                  <Button className="w-full bg-white text-purple-800 hover:bg-gray-100 font-bold text-lg py-4">
-                    🖥️ Abrir Modo TV
+                  <Button className="w-full bg-yellow-300 hover:bg-yellow-400 text-purple-900 font-bold text-lg py-4 shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2">
+                    <Tv className="h-5 w-5" />
+                    <span>Abrir Modo TV</span>
                   </Button>
                 </Link>
               </div>

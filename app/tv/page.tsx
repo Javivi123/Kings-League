@@ -261,6 +261,11 @@ export default function TVModePage() {
         ))}
       </div>
 
+      {/* Copyright en esquina inferior derecha */}
+      <div className="fixed bottom-6 right-6 text-gray-400 text-sm z-40">
+        Javier Sánchez 2025
+      </div>
+
       {/* Carrusel de contenido */}
       <div className="h-screen flex items-center justify-center p-12 relative z-10">
         <div className="w-full max-w-7xl animate-fade-in">
