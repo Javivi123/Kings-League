@@ -46,13 +46,29 @@ Si aparece un error, Node.js no está instalado o no está en el PATH.
 
 ### Paso 2: Instalar Dependencias
 
+**IMPORTANTE:** Asegúrate de estar en la carpeta correcta del proyecto.
+
 En la terminal, ejecuta:
 
 ```powershell
+# Verificar que estás en el lugar correcto
+pwd
+# Debe mostrar la ruta que termina en "Kings League"
+
+# Verificar que existe package.json
+Test-Path package.json
+# Debe devolver: True
+
+# Si todo está bien, instalar dependencias
 npm install
 ```
 
 ⏱️ Esto puede tardar 2-5 minutos. Espera a que termine.
+
+**Si da errores:**
+- Verifica que estás en la carpeta correcta
+- Asegúrate de que existe el archivo `package.json`
+- Revisa la sección "Solución de Problemas" más abajo
 
 ### Paso 3: Crear Archivo .env
 
@@ -269,6 +285,66 @@ Remove-Item -Recurse -Force node_modules
 Remove-Item package-lock.json
 npm install
 ```
+
+### ❌ "npm install" da errores de "no encuentra archivos"
+
+**Problema:** Puede ser por varias razones. Prueba estas soluciones:
+
+**Solución 1: Verificar que estás en el directorio correcto**
+```powershell
+# Verificar que estás en la carpeta del proyecto
+pwd
+# Debe mostrar la ruta que termina en "Kings League"
+# Verificar que existe package.json
+Test-Path package.json
+# Debe devolver: True
+```
+
+**Solución 2: Limpiar caché de npm**
+```powershell
+npm cache clean --force
+npm install
+```
+
+**Solución 3: Eliminar node_modules y package-lock.json (si existen)**
+```powershell
+# Si ya intentaste instalar antes y falló
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+Remove-Item package-lock.json -ErrorAction SilentlyContinue
+npm install
+```
+
+**Solución 4: Instalar con verbose para ver el error exacto**
+```powershell
+npm install --verbose
+```
+Esto mostrará más detalles sobre qué archivo específico no encuentra.
+
+**Solución 5: Verificar permisos**
+```powershell
+# Ejecutar PowerShell como Administrador
+# Clic derecho en PowerShell → "Ejecutar como administrador"
+# Luego navegar al proyecto y ejecutar npm install
+```
+
+**Solución 6: Si el error menciona "scripts" o archivos .sh**
+- El proyecto ya está actualizado para funcionar en Windows
+- El script `db:open` ahora usa `npx prisma studio` directamente
+- Si ves errores sobre `.sh`, actualiza el proyecto con la última versión
+
+**Solución 7: Instalar sin scripts opcionales**
+```powershell
+npm install --ignore-scripts
+npm install
+```
+
+**Solución 8: Verificar versión de Node.js**
+```powershell
+node --version
+npm --version
+```
+- Node.js debe ser versión 18 o superior
+- Si es muy antigua, actualiza desde https://nodejs.org/
 
 ---
 

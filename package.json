@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "db:studio": "prisma studio",
-    "db:open": "./scripts/open-db.sh",
+    "db:open": "npx prisma studio",
     "db:create-admin": "node scripts/create-admin.js",
     "db:seed": "node scripts/seed-data.js",
     "db:reset-tutorial": "node scripts/reset-tutorial.js"
