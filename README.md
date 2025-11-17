@@ -1,4 +1,4 @@
-# Kings League - Fantasy League App
+# Kings League - Cumbres School
 
 Aplicación de fantasy league para la Kings League del colegio.
 
