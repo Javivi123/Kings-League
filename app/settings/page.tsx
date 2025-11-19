@@ -65,13 +65,20 @@ export default function SettingsPage() {
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         toast.success("Perfil actualizado");
+        // Refrescar la sesión para actualizar los datos del usuario
+        window.location.reload();
       } else {
-        toast.error("Error al actualizar el perfil");
+        const errorMessage = data.error || data.details || "Error al actualizar el perfil";
+        toast.error(errorMessage);
+        console.error("Error response:", data);
       }
     } catch (error) {
-      toast.error("Error al actualizar el perfil");
+      console.error("Error updating profile:", error);
+      toast.error("Error al actualizar el perfil. Por favor, inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }

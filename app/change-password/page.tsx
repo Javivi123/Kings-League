@@ -70,12 +70,21 @@ export default function ChangePasswordPage() {
 
       if (response.ok) {
         toast.success("Contraseña actualizada exitosamente");
+        // Limpiar el formulario
+        setFormData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
         router.push("/settings");
       } else {
-        toast.error(data.error || "Error al cambiar la contraseña");
+        const errorMessage = data.error || data.details || "Error al cambiar la contraseña";
+        toast.error(errorMessage);
+        console.error("Error response:", data);
       }
     } catch (error) {
-      toast.error("Error al cambiar la contraseña");
+      console.error("Error changing password:", error);
+      toast.error("Error al cambiar la contraseña. Por favor, inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }

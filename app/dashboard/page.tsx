@@ -115,17 +115,16 @@ export default async function DashboardPage() {
             <h1 className="text-4xl font-bold">Dashboard</h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="space-y-8">
             {/* Estadísticas (solo para presidente y jugador) */}
             {dashboardData && (
-              <div className="lg:col-span-1">
+              <div>
                 <DashboardStats data={dashboardData} />
               </div>
             )}
 
             {/* Noticias (para todos) */}
-            <div className={dashboardData ? "lg:col-span-2" : "lg:col-span-3"}>
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-3">
                     <Newspaper className="h-6 w-6 text-blue-kings" />

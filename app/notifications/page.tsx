@@ -50,10 +50,14 @@ export default function NotificationsPage() {
 
   const markAsRead = async (id: string) => {
     try {
-      await fetch(`/api/notifications/${id}/read`, { method: "POST" });
-      setNotifications((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-      );
+      const res = await fetch(`/api/notifications/${id}/read`, { method: "POST" });
+      if (res.ok) {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+        );
+        // Refrescar notificaciones para sincronizar con el servidor
+        setTimeout(() => fetchNotifications(), 500);
+      }
     } catch (error) {
       console.error("Error marking notification as read:", error);
     }
@@ -68,6 +72,8 @@ export default function NotificationsPage() {
         )
       );
       setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+      // Refrescar notificaciones para sincronizar con el servidor
+      setTimeout(() => fetchNotifications(), 500);
     } catch (error) {
       console.error("Error marking all as read:", error);
     }

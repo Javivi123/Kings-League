@@ -44,11 +44,15 @@ export function NotificationBell() {
 
   const markAsRead = async (id: string) => {
     try {
-      await fetch(`/api/notifications/${id}/read`, { method: "POST" });
-      setNotifications((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-      );
-      setUnreadCount((prev) => Math.max(0, prev - 1));
+      const res = await fetch(`/api/notifications/${id}/read`, { method: "POST" });
+      if (res.ok) {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+        );
+        setUnreadCount((prev) => Math.max(0, prev - 1));
+        // Refrescar notificaciones para sincronizar con el servidor
+        setTimeout(() => fetchNotifications(), 500);
+      }
     } catch (error) {
       console.error("Error marking notification as read:", error);
     }

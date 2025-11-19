@@ -67,10 +67,13 @@ export default function RequestWildcardPage() {
         toast.success("Solicitud de carta comodín enviada exitosamente");
         router.push("/my-team");
       } else {
-        toast.error(data.error || "Error al enviar la solicitud");
+        const errorMessage = data.error || data.details || "Error al enviar la solicitud";
+        toast.error(errorMessage);
+        console.error("Error response:", data);
       }
     } catch (error) {
-      toast.error("Error al enviar la solicitud");
+      console.error("Error sending request:", error);
+      toast.error("Error al enviar la solicitud. Por favor, inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }

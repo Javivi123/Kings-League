@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -11,8 +12,18 @@ export async function GET() {
   }
 
   try {
-    // Por ahora, simulamos notificaciones basadas en datos reales
-    // En el futuro, puedes crear un modelo Notification en Prisma
+    // Obtener notificaciones leídas del usuario desde cookies
+    const cookieStore = await cookies();
+    const readNotificationsCookie = cookieStore.get(`read_notifications_${session.user.id}`);
+    
+    let readNotifications: string[] = [];
+    if (readNotificationsCookie) {
+      try {
+        readNotifications = JSON.parse(readNotificationsCookie.value);
+      } catch (e) {
+        readNotifications = [];
+      }
+    }
     
     const notifications: any[] = [];
     let unreadCount = 0;
@@ -35,28 +46,30 @@ export async function GET() {
       if (team) {
         // Notificaciones de transferencias pendientes
         team.transfers.forEach((transfer) => {
+          const isRead = readNotifications.includes(transfer.id);
           notifications.push({
             id: transfer.id,
             title: "Transferencia Pendiente",
             message: `Transferencia de ${transfer.player.name} está pendiente de revisión`,
             type: "info",
-            read: false,
+            read: isRead,
             createdAt: transfer.createdAt,
           });
-          unreadCount++;
+          if (!isRead) unreadCount++;
         });
 
         // Notificaciones de transacciones pendientes
         team.transactions.forEach((transaction) => {
+          const isRead = readNotifications.includes(transaction.id);
           notifications.push({
             id: transaction.id,
             title: "Transacción Pendiente",
             message: transaction.description,
             type: "warning",
-            read: false,
+            read: isRead,
             createdAt: transaction.createdAt,
           });
-          unreadCount++;
+          if (!isRead) unreadCount++;
         });
       }
     }
@@ -71,27 +84,29 @@ export async function GET() {
       });
 
       if (pendingRequests > 0) {
+        const isRead = readNotifications.includes("admin-requests");
         notifications.push({
           id: "admin-requests",
           title: "Solicitudes Pendientes",
           message: `Tienes ${pendingRequests} solicitud(es) pendiente(s)`,
           type: "warning",
-          read: false,
+          read: isRead,
           createdAt: new Date().toISOString(),
         });
-        unreadCount++;
+        if (!isRead) unreadCount++;
       }
 
       if (pendingTransactions > 0) {
+        const isRead = readNotifications.includes("admin-transactions");
         notifications.push({
           id: "admin-transactions",
           title: "Transacciones Pendientes",
           message: `Tienes ${pendingTransactions} transacción(es) pendiente(s)`,
           type: "warning",
-          read: false,
+          read: isRead,
           createdAt: new Date().toISOString(),
         });
-        unreadCount++;
+        if (!isRead) unreadCount++;
       }
     }
 

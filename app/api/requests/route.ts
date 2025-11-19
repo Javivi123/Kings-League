@@ -59,8 +59,11 @@ export async function POST(request: Request) {
     }
 
     console.error("Error creating request:", error);
+    
+    // Proporcionar más información del error
+    const errorMessage = error instanceof Error ? error.message : "Error desconocido";
     return NextResponse.json(
-      { error: "Error al crear la solicitud" },
+      { error: "Error al crear la solicitud", details: errorMessage },
       { status: 500 }
     );
   }
