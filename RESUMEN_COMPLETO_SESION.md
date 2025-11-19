@@ -2643,3 +2643,112 @@ Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la ba
 
 **Última actualización:** Diciembre 2025 - Corrección de 6 fallos críticos
 
+---
+
+## 🐛 CORRECCIÓN DE FALLOS ADICIONALES - Diciembre 2025
+
+### 📋 Fallos Corregidos (Segunda Ronda)
+
+#### 1. **Error al Solicitar Wildcard (Persistente)**
+- **Problema:** El error seguía apareciendo al enviar solicitudes de wildcard
+- **Solución:**
+  - Añadida relación `team` en el modelo `Request` del schema de Prisma
+  - Modificada la API para manejar `teamId` opcional correctamente
+  - Solo se añade `teamId` si el usuario es presidente y tiene equipo
+- **Archivos:**
+  - `prisma/schema.prisma` (relación team añadida)
+  - `app/api/requests/route.ts` (manejo mejorado de teamId opcional)
+
+#### 2. **Error en `/admin/requests` - Relación Team No Encontrada**
+- **Problema:** La página daba error porque intentaba incluir `team` pero la relación no existía
+- **Solución:**
+  - Añadida relación `team` en el modelo `Request`
+  - Añadida relación `requests` en el modelo `Team`
+  - Creado componente cliente `RequestActions` para manejar aprobación/rechazo
+  - API `/api/requests/[id]` creada para actualizar estado
+- **Archivos:**
+  - `prisma/schema.prisma` (relaciones añadidas)
+  - `app/admin/requests/page.tsx` (usando componente RequestActions)
+  - `app/api/requests/[id]/route.ts` (nuevo - PATCH para aprobar/rechazar)
+  - `components/admin/RequestActions.tsx` (nuevo - componente cliente)
+
+#### 3. **Botones de Aprobar/Rechazar Transacciones No Funcionaban**
+- **Problema:** Los botones en `/admin/transactions` no tenían funcionalidad
+- **Solución:**
+  - Creado componente cliente `TransactionActions` con handlers
+  - Creada API `/api/transactions/[id]` para actualizar estado
+  - Lógica para actualizar balance del equipo al aprobar transacciones
+  - Notificaciones toast para feedback al usuario
+- **Archivos:**
+  - `app/admin/transactions/page.tsx` (usando componente TransactionActions)
+  - `app/api/transactions/[id]/route.ts` (nuevo - PATCH con lógica de balance)
+  - `components/admin/TransactionActions.tsx` (nuevo - componente cliente)
+
+#### 4. **404 en `/matches/[id]`**
+- **Problema:** La página de detalle de partido daba 404
+- **Solución:**
+  - Actualizado para usar `await params` (Next.js 14 requiere Promise en params)
+  - El archivo ya existía pero necesitaba actualización para Next.js 14
+- **Archivo:** `app/matches/[id]/page.tsx` (params actualizado a Promise)
+
+#### 5. **Botones de Ofertar en `/transfers` No Funcionaban**
+- **Problema:** Los botones "Ofertar" en el mercado de transferencias no hacían nada
+- **Solución:**
+  - Creado componente cliente `OfferButton` con handler de oferta
+  - Creada API `/api/transfers/offer` para crear ofertas
+  - Validación de balance suficiente
+  - Creación automática de transfer y transaction pendientes
+  - Notificaciones toast para feedback
+- **Archivos:**
+  - `app/transfers/page.tsx` (usando componente OfferButton)
+  - `app/api/transfers/offer/route.ts` (nuevo - POST para crear ofertas)
+  - `components/transfers/OfferButton.tsx` (nuevo - componente cliente)
+
+### 📝 Archivos Creados/Modificados
+
+**APIs Creadas:**
+- `app/api/requests/[id]/route.ts` - Aprobar/rechazar solicitudes
+- `app/api/transactions/[id]/route.ts` - Aprobar/rechazar transacciones
+- `app/api/transfers/offer/route.ts` - Crear ofertas de transferencia
+
+**Componentes Creados:**
+- `components/admin/RequestActions.tsx` - Botones de acción para requests
+- `components/admin/TransactionActions.tsx` - Botones de acción para transactions
+- `components/transfers/OfferButton.tsx` - Botón de oferta funcional
+
+**Páginas Modificadas:**
+- `app/admin/requests/page.tsx` - Usa componente cliente para acciones
+- `app/admin/transactions/page.tsx` - Usa componente cliente para acciones
+- `app/transfers/page.tsx` - Usa componente cliente para ofertas
+- `app/matches/[id]/page.tsx` - Parámetros actualizados para Next.js 14
+
+**Schema Modificado:**
+- `prisma/schema.prisma` - Relación `team` añadida a `Request`, relación `requests` añadida a `Team`
+
+### ✨ Mejoras Adicionales
+
+- **Componentes Cliente Separados:** Las acciones interactivas ahora están en componentes cliente separados para mejor organización
+- **Feedback Visual:** Todas las acciones muestran notificaciones toast
+- **Validaciones Mejoradas:** Validación de balance, permisos y existencia de recursos
+- **Lógica de Negocio:** Aprobación de transacciones actualiza automáticamente el balance del equipo
+- **Compatibilidad Next.js 14:** Parámetros dinámicos actualizados para usar Promise
+
+### 🔧 Detalles Técnicos
+
+**Relaciones de Base de Datos:**
+- `Request.team` - Relación opcional con Team
+- `Team.requests` - Array de requests del equipo
+- Migración necesaria: `npx prisma migrate dev --name add_request_team_relation`
+
+**Lógica de Transacciones:**
+- Al aprobar transferencia/wildcard: Se resta dinero del equipo
+- Al aprobar inversión: No se modifica balance (lógica de negocio)
+- Al rechazar: No se modifica balance
+
+**Lógica de Ofertas:**
+- Crea un `Transfer` con estado "pending"
+- Crea un `Transaction` con estado "pending"
+- El admin debe aprobar ambas para completar la transferencia
+
+**Última actualización:** Diciembre 2025 - Corrección de 5 fallos adicionales críticos
+
