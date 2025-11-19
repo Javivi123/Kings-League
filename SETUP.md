@@ -52,17 +52,38 @@ npx prisma migrate dev --name init
 
 Esto creará el archivo `dev.db` (base de datos SQLite).
 
-## ✅ Paso 5: (Opcional) Ver la Base de Datos
+## ✅ Paso 5: Crear Usuario Admin
+
+Crea un usuario administrador:
+
+```bash
+npm run db:create-admin
+```
+
+O usa Prisma Studio para crear usuarios manualmente.
+
+## ✅ Paso 6: (Opcional) Generar Datos de Prueba
+
+Genera datos de prueba para probar la aplicación:
+
+```bash
+npm run db:seed
+```
+
+Esto creará usuarios, equipos, jugadores, partidos y noticias de ejemplo.
+
+## ✅ Paso 7: (Opcional) Ver la Base de Datos
 
 Puedes abrir Prisma Studio para ver y editar la base de datos:
 
 ```bash
-npx prisma studio
+npm run db:open
+# O: npx prisma studio
 ```
 
 Se abrirá en http://localhost:5555
 
-## ✅ Paso 6: Iniciar el Servidor
+## ✅ Paso 8: Iniciar el Servidor
 
 ```bash
 npm run dev
@@ -79,11 +100,15 @@ Ahora puedes:
 
 ## 📝 Notas Importantes
 
-1. **Primer usuario admin**: Necesitarás crear un usuario admin manualmente en la base de datos o a través de Prisma Studio.
+1. **Primer usuario admin**: Usa `npm run db:create-admin` o crea uno manualmente en Prisma Studio.
 
 2. **Base de datos**: Por defecto usa SQLite (`dev.db`). Para producción, cambia a PostgreSQL en `prisma/schema.prisma`.
 
 3. **Imágenes**: Los logos y fotos se guardan como URLs. Considera usar un servicio de almacenamiento en la nube.
+
+4. **Resetear contraseñas**: Si olvidas una contraseña, usa `npm run db:reset-password` (ver `RESETEAR_CONTRASEÑA.md`).
+
+5. **Título de la aplicación**: "Cumbres Kings League" (visible en la pestaña del navegador).
 
 ## 🆘 Problemas Comunes
 

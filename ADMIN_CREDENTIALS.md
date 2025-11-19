@@ -101,3 +101,29 @@ node -e "const bcrypt = require('bcryptjs'); bcrypt.hash('tu-password', 10).then
 
 O desde Prisma Studio, crea el usuario y luego actualiza la contraseña desde la aplicación.
 
+## 🔑 Resetear Contraseñas
+
+Si un usuario ha olvidado su contraseña, puedes resetearla usando el script:
+
+```bash
+npm run db:reset-password
+```
+
+El script te pedirá:
+1. El email del usuario
+2. La nueva contraseña (mínimo 6 caracteres)
+3. Confirmación de la nueva contraseña
+
+**Ejemplo:**
+```bash
+$ npm run db:reset-password
+📧 Ingresa el email del usuario: usuario@ejemplo.com
+🔑 Ingresa la nueva contraseña: nuevaPassword123
+🔑 Confirma la nueva contraseña: nuevaPassword123
+✅ Contraseña actualizada exitosamente!
+```
+
+**Nota:** Las contraseñas están hasheadas con bcrypt y no se pueden deshashear. Solo puedes resetearlas estableciendo una nueva.
+
+📖 **Ver guía completa:** [`RESETEAR_CONTRASEÑA.md`](./RESETEAR_CONTRASEÑA.md)
+

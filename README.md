@@ -146,13 +146,45 @@ El modo TV se activa desde la página de Configuración y optimiza la visualizac
 - Protección de rutas por rol
 - Validación de datos con Zod
 
-## 📝 Próximos Pasos
+## 📝 Funcionalidades Implementadas
 
-- [ ] Implementar páginas específicas por rol
-- [ ] Sistema de notificaciones
-- [ ] Chat entre usuarios
-- [ ] Estadísticas avanzadas
-- [ ] Exportar datos
+- ✅ Sistema completo de usuarios con 4 roles
+- ✅ Gestión de equipos, jugadores y partidos
+- ✅ Sistema de transferencias y mercado
+- ✅ Sistema de notificaciones
+- ✅ Dashboard personalizado por rol
+- ✅ Modo TV con carrusel automático
+- ✅ Sistema de solicitudes (wildcards)
+- ✅ Gestión de transacciones
+- ✅ Vista detallada de partidos (goles, tarjetas, alineaciones, estadísticas)
+- ✅ Exportar/Importar datos
+- ✅ Sistema de logros y Hall of Fame
+- ✅ Tutorial interactivo para nuevos usuarios
+- ✅ Animaciones optimizadas
+
+## 🛠️ Scripts Disponibles
+
+```bash
+# Desarrollo
+npm run dev              # Iniciar servidor desarrollo
+npm run build            # Build producción
+npm run start            # Iniciar producción
+
+# Base de datos
+npm run db:open          # Abrir Prisma Studio
+npm run db:create-admin  # Crear usuario admin
+npm run db:seed          # Generar datos de prueba
+npm run db:reset-tutorial # Resetear tutorial de usuarios
+npm run db:reset-password # Resetear contraseña de usuario
+```
+
+## 📖 Documentación
+
+- **SETUP.md** - Guía de configuración paso a paso
+- **SETUP_WINDOWS.md** - Guía específica para Windows
+- **ADMIN_CREDENTIALS.md** - Credenciales y gestión de usuarios
+- **RESETEAR_CONTRASEÑA.md** - Cómo resetear contraseñas
+- **RESUMEN_COMPLETO_SESION.md** - Documentación completa del proyecto
 
 ## 🤝 Contribuir
 
