@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ShoppingCart, Check, X, Euro, Clock } from "lucide-react";
+import { ShoppingCart, Euro } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { TransactionActions } from "@/components/admin/TransactionActions";
 
 async function getTransactions() {
   return await prisma.transaction.findMany({
@@ -144,26 +145,7 @@ export default async function AdminTransactionsPage() {
                         {format(new Date(transaction.createdAt), "d MMM yyyy", { locale: es })}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        {transaction.status === "pending" ? (
-                          <div className="flex items-center justify-center space-x-2">
-                            <button
-                              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-                              title="Aprobar"
-                            >
-                              <Check className="h-4 w-4" />
-                            </button>
-                            <button
-                              className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                              title="Rechazar"
-                            >
-                              <X className="h-4 w-4" />
-                            </button>
-                          </div>
-                        ) : (
-                          <span className="text-gray-400 text-sm">
-                            {transaction.reviewedBy ? "Revisada" : "-"}
-                          </span>
-                        )}
+                        <TransactionActions transactionId={transaction.id} currentStatus={transaction.status} />
                       </td>
                     </tr>
                   ))}

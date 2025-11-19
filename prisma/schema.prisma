@@ -57,6 +57,7 @@ model Team {
   auctions    Auction[]
   investments Investment[]
   matchEvents MatchEvent[]
+  requests    Request[]
   matchLineups MatchLineup[]
   
   @@map("teams")
@@ -285,6 +286,7 @@ model Request {
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   teamId      String?  // Si la solicitud es de un equipo
+  team        Team?    @relation(fields: [teamId], references: [id], onDelete: SetNull)
   data        String?  // JSON con datos adicionales
   status      String   @default("pending") // "pending", "approved", "rejected"
   reviewedBy  String?  // ID del admin que revisó

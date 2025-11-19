@@ -39,14 +39,20 @@ export async function POST(request: Request) {
       effect: validatedData.effect,
     });
 
+    const requestData: any = {
+      type: validatedData.type,
+      userId: session.user.id,
+      data: data,
+      status: "pending",
+    };
+
+    // Solo añadir teamId si existe
+    if (teamId) {
+      requestData.teamId = teamId;
+    }
+
     const request = await prisma.request.create({
-      data: {
-        type: validatedData.type,
-        userId: session.user.id,
-        teamId: teamId,
-        data: data,
-        status: "pending",
-      },
+      data: requestData,
     });
 
     return NextResponse.json(request, { status: 201 });

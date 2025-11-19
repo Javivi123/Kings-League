@@ -4,7 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ShoppingCart, Users, Euro } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
+import { OfferButton } from "@/components/transfers/OfferButton";
 
 async function getMarketPlayers() {
   return await prisma.player.findMany({
@@ -123,13 +124,11 @@ export default async function TransfersPage() {
                     </div>
                   </div>
 
-                  <button
-                    className="w-full px-4 py-2 bg-blue-kings text-white rounded-lg hover:bg-blue-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={userTeam.eurosKings < player.price}
-                  >
-                    <Euro className="inline h-4 w-4 mr-1" />
-                    Ofertar {player.price.toFixed(0)} €K
-                  </button>
+                  <OfferButton
+                    playerId={player.id}
+                    playerPrice={player.price}
+                    userBalance={userTeam.eurosKings}
+                  />
                 </div>
               ))}
             </div>

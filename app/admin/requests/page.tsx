@@ -4,9 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FileText, Check, X, Clock } from "lucide-react";
+import { FileText } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { RequestActions } from "@/components/admin/RequestActions";
 
 async function getRequests() {
   return await prisma.request.findMany({
@@ -143,26 +144,7 @@ export default async function AdminRequestsPage() {
                         {format(new Date(request.createdAt), "d MMM yyyy", { locale: es })}
                       </td>
                       <td className="px-6 py-4 text-center">
-                        {request.status === "pending" ? (
-                          <div className="flex items-center justify-center space-x-2">
-                            <button
-                              className="p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-                              title="Aprobar"
-                            >
-                              <Check className="h-4 w-4" />
-                            </button>
-                            <button
-                              className="p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                              title="Rechazar"
-                            >
-                              <X className="h-4 w-4" />
-                            </button>
-                          </div>
-                        ) : (
-                          <span className="text-gray-400 text-sm">
-                            {request.reviewedBy ? "Revisada" : "-"}
-                          </span>
-                        )}
+                        <RequestActions requestId={request.id} currentStatus={request.status} />
                       </td>
                     </tr>
                   ))}

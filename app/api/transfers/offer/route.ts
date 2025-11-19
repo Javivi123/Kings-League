@@ -1,0 +1,107 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { NextResponse } from "next/server";
+import { z } from "zod";
+
+const offerSchema = z.object({
+  playerId: z.string(),
+  price: z.number().positive(),
+});
+
+export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (session.user.role !== "presidente") {
+    return NextResponse.json(
+      { error: "Solo los presidentes pueden hacer ofertas" },
+      { status: 403 }
+    );
+  }
+
+  try {
+    const body = await request.json();
+    const validatedData = offerSchema.parse(body);
+
+    // Obtener el equipo del presidente
+    const team = await prisma.team.findFirst({
+      where: { ownerId: session.user.id },
+    });
+
+    if (!team) {
+      return NextResponse.json(
+        { error: "No tienes un equipo registrado" },
+        { status: 404 }
+      );
+    }
+
+    // Verificar balance
+    if (team.eurosKings < validatedData.price) {
+      return NextResponse.json(
+        { error: "No tienes suficientes Euros Kings" },
+        { status: 400 }
+      );
+    }
+
+    // Verificar que el jugador existe y está en el mercado
+    const player = await prisma.player.findUnique({
+      where: { id: validatedData.playerId },
+    });
+
+    if (!player) {
+      return NextResponse.json(
+        { error: "Jugador no encontrado" },
+        { status: 404 }
+      );
+    }
+
+    if (!player.isOnMarket) {
+      return NextResponse.json(
+        { error: "El jugador no está en el mercado" },
+        { status: 400 }
+      );
+    }
+
+    // Crear la transferencia
+    const transfer = await prisma.transfer.create({
+      data: {
+        fromTeamId: player.teamId || "",
+        toTeamId: team.id,
+        playerId: validatedData.playerId,
+        price: validatedData.price,
+        status: "pending",
+      },
+    });
+
+    // Crear transacción pendiente
+    await prisma.transaction.create({
+      data: {
+        teamId: team.id,
+        type: "transfer",
+        amount: validatedData.price,
+        description: `Oferta por ${player.name}`,
+        status: "pending",
+      },
+    });
+
+    return NextResponse.json(transfer, { status: 201 });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: "Datos inválidos", details: error.errors },
+        { status: 400 }
+      );
+    }
+
+    console.error("Error creating offer:", error);
+    return NextResponse.json(
+      { error: "Error al crear la oferta" },
+      { status: 500 }
+    );
+  }
+}
+
