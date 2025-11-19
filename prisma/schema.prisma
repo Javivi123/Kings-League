@@ -56,6 +56,8 @@ model Team {
   transactions Transaction[]
   auctions    Auction[]
   investments Investment[]
+  matchEvents MatchEvent[]
+  matchLineups MatchLineup[]
   
   @@map("teams")
 }
@@ -82,6 +84,9 @@ model Player {
   investments   Investment[] // Dinero invertido en este jugador
   auctions      Auction[]
   suspensions   Suspension[]
+  matchEvents   MatchEvent[]
+  matchLineups  MatchLineup[]
+  substitutionsOut MatchEvent[] @relation("SubstitutionOut")
   
   @@map("players")
 }
@@ -115,7 +120,72 @@ model Match {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
+  events      MatchEvent[]
+  lineups     MatchLineup[]
+  stats       MatchStats?
+  
   @@map("matches")
+}
+
+model MatchEvent {
+  id          String   @id @default(cuid())
+  matchId     String
+  match       Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  type        String   // "goal", "yellow_card", "red_card", "substitution"
+  minute      Int
+  playerId    String?
+  player      Player?  @relation(fields: [playerId], references: [id], onDelete: SetNull)
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
+  description String?  // Para goles: asistencia, tipo (penalty, etc.)
+  playerOutId String?  // Para sustituciones: jugador que sale
+  playerOut   Player?  @relation("SubstitutionOut", fields: [playerOutId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  
+  @@map("match_events")
+}
+
+model MatchLineup {
+  id          String   @id @default(cuid())
+  matchId     String
+  match       Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  teamId      String
+  team        Team     @relation(fields: [teamId], references: [id])
+  playerId    String
+  player      Player   @relation(fields: [playerId], references: [id])
+  position    String   // Posición en el campo (GK, DEF, MID, FWD)
+  isStarter   Boolean  @default(true) // true = titular, false = banquillo
+  shirtNumber Int?
+  createdAt   DateTime @default(now())
+  
+  @@unique([matchId, teamId, playerId])
+  @@map("match_lineups")
+}
+
+model MatchStats {
+  id              String   @id @default(cuid())
+  matchId         String   @unique
+  match           Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  homePossession  Int?     // Porcentaje de posesión equipo local
+  awayPossession  Int?     // Porcentaje de posesión equipo visitante
+  homeShots       Int?     // Tiros equipo local
+  awayShots       Int?     // Tiros equipo visitante
+  homeShotsOnTarget Int?   // Tiros a puerta equipo local
+  awayShotsOnTarget Int?   // Tiros a puerta equipo visitante
+  homePasses      Int?     // Pases equipo local
+  awayPasses      Int?     // Pases equipo visitante
+  homePassAccuracy Float?  // Precisión de pases equipo local (%)
+  awayPassAccuracy Float?  // Precisión de pases equipo visitante (%)
+  homeFouls       Int?     // Faltas equipo local
+  awayFouls       Int?     // Faltas equipo visitante
+  homeCorners     Int?     // Saques de esquina equipo local
+  awayCorners     Int?     // Saques de esquina equipo visitante
+  homeOffsides    Int?     // Fueras de juego equipo local
+  awayOffsides    Int?     // Fueras de juego equipo visitante
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@map("match_stats")
 }
 
 model Transfer {

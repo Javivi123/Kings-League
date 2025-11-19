@@ -125,9 +125,10 @@ export default function MatchesPage() {
           ) : (
             <div className="space-y-4">
               {matches.map((match) => (
-                <div
+                <Link
+                  href={`/matches/${match.id}`}
                   key={match.id}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                  className="block bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
@@ -153,7 +154,7 @@ export default function MatchesPage() {
                     {/* Equipo Local */}
                     <div className="text-center">
                       <Link
-                        href={`/teams/${match.homeTeam.id}`}
+                        href={`/matches/${match.id}`}
                         className="flex flex-col items-center hover:opacity-80 transition-opacity"
                       >
                         {match.homeTeam.logo ? (
@@ -189,7 +190,7 @@ export default function MatchesPage() {
                     {/* Equipo Visitante */}
                     <div className="text-center">
                       <Link
-                        href={`/teams/${match.awayTeam.id}`}
+                        href={`/matches/${match.id}`}
                         className="flex flex-col items-center hover:opacity-80 transition-opacity"
                       >
                         {match.awayTeam.logo ? (
@@ -207,7 +208,7 @@ export default function MatchesPage() {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
