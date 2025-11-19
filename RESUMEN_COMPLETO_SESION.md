@@ -2519,3 +2519,127 @@ Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la ba
 
 **Última actualización:** Diciembre 2025 - Desarrollo masivo de páginas y funcionalidades completado
 
+---
+
+## 🐛 CORRECCIÓN DE FALLOS - Diciembre 2025
+
+### 📋 Fallos Corregidos
+
+#### 1. **Error al Cambiar Contraseña (`/change-password`)**
+- **Problema:** La API `/api/auth/change-password` no existía
+- **Solución:** 
+  - Creada API `/api/auth/change-password/route.ts`
+  - Validación de contraseña actual con bcrypt
+  - Hash de nueva contraseña antes de guardar
+  - Mensajes de error mejorados
+- **Archivo:** `app/api/auth/change-password/route.ts`
+
+#### 2. **Favicon Vacío y Título Largo**
+- **Problema:** 
+  - Favicon no existía (pestaña vacía)
+  - Título muy largo: "Kings League - Fantasy League"
+- **Solución:**
+  - Título cambiado a "Cumbres Kings League"
+  - Creado favicon SVG con emoji de corona (👑)
+  - Añadido al metadata del layout
+- **Archivos:**
+  - `app/layout.tsx` (metadata actualizado)
+  - `public/favicon.svg` (nuevo)
+  - `public/favicon.ico` (nuevo)
+
+#### 3. **Error al Actualizar Perfil (`/settings`)**
+- **Problema:** La API `/api/user/update` no existía
+- **Solución:**
+  - Creada API `/api/user/update/route.ts`
+  - Permite actualizar nombre y edad del usuario actual
+  - Validación con zod
+  - Recarga automática de la página después de actualizar
+- **Archivo:** `app/api/user/update/route.ts`
+
+#### 4. **Layout del Dashboard - Stats Chocan con Noticias**
+- **Problema:** Para presidente/jugador, las estadísticas y noticias estaban en el mismo grid causando solapamiento
+- **Solución:**
+  - Cambiado de grid de 3 columnas a layout vertical con `space-y-8`
+  - Stats en su propia sección arriba
+  - Noticias en sección separada abajo
+  - Sin solapamiento visual
+- **Archivo:** `app/dashboard/page.tsx`
+
+#### 5. **Error al Solicitar Wildcard**
+- **Problema:** La API de requests podía fallar silenciosamente
+- **Solución:**
+  - Mejorado manejo de errores en la API
+  - Mensajes de error más descriptivos
+  - Logging de errores en consola para debugging
+  - Validación mejorada de datos
+- **Archivos:**
+  - `app/api/requests/route.ts` (mejorado)
+  - `app/wildcards/request/page.tsx` (mejorado manejo de errores)
+
+#### 6. **Notificaciones No Se Marcaban Como Leídas**
+- **Problema:** Las notificaciones se marcaban como leídas en el cliente pero no persistían
+- **Solución:**
+  - Implementado sistema de persistencia con cookies
+  - Cada usuario tiene su propia cookie con IDs de notificaciones leídas
+  - La API de notificaciones lee las cookies y marca como leídas
+  - Refresco automático después de marcar como leída
+  - Cookie expira en 1 año
+- **Archivos:**
+  - `app/api/notifications/route.ts` (lee cookies)
+  - `app/api/notifications/[id]/read/route.ts` (guarda en cookies)
+  - `components/notifications/NotificationBell.tsx` (refresco automático)
+  - `app/notifications/page.tsx` (refresco automático)
+
+### 📝 Archivos Creados/Modificados
+
+**APIs Creadas:**
+- `app/api/auth/change-password/route.ts` - Cambiar contraseña
+- `app/api/user/update/route.ts` - Actualizar perfil
+
+**APIs Mejoradas:**
+- `app/api/requests/route.ts` - Mejor manejo de errores
+- `app/api/notifications/route.ts` - Persistencia con cookies
+- `app/api/notifications/[id]/read/route.ts` - Guardar en cookies
+
+**Páginas Modificadas:**
+- `app/dashboard/page.tsx` - Layout vertical para evitar solapamiento
+- `app/change-password/page.tsx` - Mejor manejo de errores
+- `app/settings/page.tsx` - Mejor manejo de errores y recarga
+- `app/wildcards/request/page.tsx` - Mejor manejo de errores
+- `app/layout.tsx` - Título y favicon actualizados
+
+**Componentes Modificados:**
+- `components/notifications/NotificationBell.tsx` - Refresco automático
+
+**Assets Creados:**
+- `public/favicon.svg` - Favicon con corona
+- `public/favicon.ico` - Favicon alternativo
+
+### ✨ Mejoras Adicionales
+
+- **Mensajes de error más descriptivos:** Todos los errores ahora muestran información útil
+- **Logging mejorado:** Errores se registran en consola para debugging
+- **UX mejorada:** Recarga automática después de actualizar perfil
+- **Persistencia de estado:** Notificaciones leídas persisten entre sesiones
+
+### 🔧 Detalles Técnicos
+
+**Sistema de Notificaciones Leídas:**
+- Usa cookies del navegador para persistencia
+- Cookie por usuario: `read_notifications_{userId}`
+- Almacena array de IDs de notificaciones leídas
+- Expiración: 1 año
+- `httpOnly: false` para permitir lectura desde cliente si es necesario
+
+**Validación de Contraseñas:**
+- Verificación de contraseña actual con `bcrypt.compare`
+- Hash de nueva contraseña con `bcrypt.hash` (10 rounds)
+- Validación de longitud mínima (6 caracteres)
+
+**Layout Responsive:**
+- Dashboard usa `space-y-8` para separación vertical
+- Stats y noticias en secciones independientes
+- Sin dependencia de grid para evitar solapamiento
+
+**Última actualización:** Diciembre 2025 - Corrección de 6 fallos críticos
+
