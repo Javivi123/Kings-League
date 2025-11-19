@@ -2752,3 +2752,118 @@ Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la ba
 
 **Última actualización:** Diciembre 2025 - Corrección de 5 fallos adicionales críticos
 
+---
+
+## 🐛 CORRECCIÓN FINAL DE FALLOS - Diciembre 2025
+
+### 📋 Fallos Corregidos (Tercera Ronda)
+
+#### 1. **Error al Solicitar Wildcard (Persistente)**
+- **Problema:** El error seguía apareciendo después de los cambios anteriores
+- **Solución:**
+  - Migración de Prisma aplicada correctamente (`add_request_team_relation`)
+  - Cliente Prisma regenerado
+  - Tipado mejorado en la API (usando tipos explícitos en lugar de `any`)
+- **Archivos:**
+  - `app/api/requests/route.ts` (tipado mejorado)
+  - Migración aplicada: `20251119204209_add_request_team_relation`
+
+#### 2. **Error en `/admin/requests` - Relación Team No Encontrada**
+- **Problema:** Error "Unknown field `team`" persistía porque la migración no se había aplicado
+- **Solución:**
+  - Migración aplicada exitosamente
+  - Cliente Prisma regenerado
+  - La relación `team` ahora está disponible en el modelo `Request`
+- **Resultado:** ✅ La página `/admin/requests` ahora funciona correctamente
+
+#### 3. **Botones de Transacciones Se Quedan Congelados**
+- **Problema:** Los botones se quedaban en estado gris y tardaban mucho en reaccionar
+- **Solución:**
+  - Cambiado de `router.refresh()` a `window.location.reload()` con delay de 500ms
+  - Mejor manejo del estado `loading` (se resetea en caso de error)
+  - Feedback visual más claro
+- **Archivos:**
+  - `components/admin/TransactionActions.tsx` (mejorado)
+  - `components/admin/RequestActions.tsx` (mejorado)
+  - `components/transfers/OfferButton.tsx` (mejorado)
+
+#### 4. **404 en `/matches/[id]`**
+- **Problema:** La página daba 404 aunque el archivo existía
+- **Solución:**
+  - Actualizado para usar `Promise<{ id: string }>` en params (Next.js 14)
+  - Añadido `await params` antes de usar el id
+  - Formato de función mejorado para mejor legibilidad
+- **Archivos:**
+  - `app/matches/[id]/page.tsx` (params actualizado)
+  - `app/teams/[id]/page.tsx` (params actualizado para consistencia)
+  - `app/players/[id]/page.tsx` (params actualizado para consistencia)
+
+#### 5. **Error "Foreign Key Constraint" al Crear Oferta**
+- **Problema:** Error al crear oferta cuando el jugador no tiene equipo (`fromTeamId` era string vacío "")
+- **Solución:**
+  - Cambiado de `player.teamId || ""` a solo incluir `fromTeamId` si `player.teamId` existe
+  - El schema permite `fromTeamId` como opcional (`String?`), así que usamos `null` en lugar de string vacío
+- **Archivo:** `app/api/transfers/offer/route.ts`
+
+#### 6. **Rendimiento Lento de la Aplicación**
+- **Problema:** La app compilaba muy lento y tardaba mucho en cargar páginas
+- **Soluciones Aplicadas:**
+  - Optimizaciones en `next.config.js`:
+    - `swcMinify: true` - Minificación más rápida
+    - `removeConsole` en producción
+    - `optimizeCss: true` - Optimización de CSS
+  - Mejoras en componentes:
+    - Uso de `window.location.reload()` en lugar de `router.refresh()` para evitar re-renders innecesarios
+    - Mejor manejo de estados de loading
+- **Archivo:** `next.config.js` (optimizaciones añadidas)
+
+### 📝 Archivos Modificados
+
+**APIs Mejoradas:**
+- `app/api/requests/route.ts` - Tipado mejorado
+- `app/api/transfers/offer/route.ts` - Manejo correcto de `fromTeamId` opcional
+
+**Componentes Mejorados:**
+- `components/admin/TransactionActions.tsx` - Mejor manejo de loading y recarga
+- `components/admin/RequestActions.tsx` - Mejor manejo de loading y recarga
+- `components/transfers/OfferButton.tsx` - Mejor manejo de errores y recarga
+
+**Páginas Actualizadas:**
+- `app/matches/[id]/page.tsx` - Params actualizado para Next.js 14
+- `app/teams/[id]/page.tsx` - Params actualizado para consistencia
+- `app/players/[id]/page.tsx` - Params actualizado para consistencia
+
+**Configuración:**
+- `next.config.js` - Optimizaciones de rendimiento añadidas
+
+**Base de Datos:**
+- Migración aplicada: `20251119204209_add_request_team_relation`
+- Cliente Prisma regenerado
+
+### ✨ Mejoras Adicionales
+
+- **Consistencia en Params:** Todas las páginas dinámicas ahora usan `Promise<{ id: string }>` para Next.js 14
+- **Mejor Feedback:** Los botones muestran estado de loading más claro
+- **Optimizaciones de Rendimiento:** Configuración de Next.js optimizada
+- **Manejo de Errores:** Mensajes de error más descriptivos en todas las APIs
+
+### 🔧 Detalles Técnicos
+
+**Migración de Prisma:**
+- Nombre: `20251119204209_add_request_team_relation`
+- Añade relación `team` al modelo `Request`
+- Añade relación `requests` al modelo `Team`
+- Estado: ✅ Aplicada exitosamente
+
+**Optimizaciones de Next.js:**
+- `swcMinify`: Minificación más rápida que Terser
+- `removeConsole`: Elimina console.log en producción
+- `optimizeCss`: Optimiza CSS automáticamente
+
+**Manejo de Foreign Keys:**
+- `fromTeamId` en Transfer ahora se maneja correctamente como opcional
+- Solo se incluye en el objeto si el jugador tiene equipo
+- Evita violaciones de foreign key constraint
+
+**Última actualización:** Diciembre 2025 - Corrección final de todos los fallos reportados
+
