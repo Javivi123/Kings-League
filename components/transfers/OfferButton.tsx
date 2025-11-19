@@ -38,14 +38,19 @@ export function OfferButton({ playerId, playerPrice, userBalance }: OfferButtonP
 
       if (res.ok) {
         toast.success("Oferta enviada exitosamente");
-        router.refresh();
+        // Usar window.location.reload() para forzar recarga completa
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } else {
-        toast.error(data.error || "Error al enviar la oferta");
+        const errorMessage = data.error || data.details || "Error al enviar la oferta";
+        toast.error(errorMessage);
+        console.error("Error response:", data);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error sending offer:", error);
-      toast.error("Error al enviar la oferta");
-    } finally {
+      toast.error("Error al enviar la oferta. Por favor, inténtalo de nuevo.");
       setLoading(false);
     }
   };

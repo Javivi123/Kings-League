@@ -39,7 +39,13 @@ export async function POST(request: Request) {
       effect: validatedData.effect,
     });
 
-    const requestData: any = {
+    const requestData: {
+      type: string;
+      userId: string;
+      data: string;
+      status: string;
+      teamId?: string;
+    } = {
       type: validatedData.type,
       userId: session.user.id,
       data: data,

@@ -67,14 +67,20 @@ export async function POST(request: Request) {
     }
 
     // Crear la transferencia
+    const transferData: any = {
+      toTeamId: team.id,
+      playerId: validatedData.playerId,
+      price: validatedData.price,
+      status: "pending",
+    };
+
+    // Solo añadir fromTeamId si el jugador tiene equipo
+    if (player.teamId) {
+      transferData.fromTeamId = player.teamId;
+    }
+
     const transfer = await prisma.transfer.create({
-      data: {
-        fromTeamId: player.teamId || "",
-        toTeamId: team.id,
-        playerId: validatedData.playerId,
-        price: validatedData.price,
-        status: "pending",
-      },
+      data: transferData,
     });
 
     // Crear transacción pendiente

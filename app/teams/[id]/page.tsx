@@ -49,8 +49,9 @@ async function getTeam(id: string) {
   }
 }
 
-export default async function TeamPage({ params }: { params: { id: string } }) {
-  const team = await getTeam(params.id);
+export default async function TeamPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const team = await getTeam(id);
 
   if (!team) {
     notFound();

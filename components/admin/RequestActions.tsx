@@ -31,14 +31,17 @@ export function RequestActions({ requestId, currentStatus }: RequestActionsProps
         toast.success(
           status === "approved" ? "Solicitud aprobada" : "Solicitud rechazada"
         );
-        router.refresh();
+        // Usar window.location.reload() para forzar recarga completa
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } else {
         toast.error(data.error || "Error al actualizar la solicitud");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error updating request:", error);
       toast.error("Error al actualizar la solicitud");
-    } finally {
       setLoading(false);
     }
   };

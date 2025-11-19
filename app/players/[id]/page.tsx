@@ -40,9 +40,10 @@ async function getPlayer(id: string) {
 export default async function PlayerPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const player = await getPlayer(params.id);
+  const { id } = await params;
+  const player = await getPlayer(id);
 
   if (!player) {
     notFound();
