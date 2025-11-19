@@ -85,9 +85,13 @@ Se abrirá en http://localhost:5555
 
 ## ✅ Paso 8: Iniciar el Servidor
 
+**⚠️ IMPORTANTE:** Usa `npm run dev`, NO `npx run dev`
+
 ```bash
 npm run dev
 ```
+
+**Nota:** `npx run dev` intentará instalar un paquete inexistente llamado "run" y fallará. El comando correcto es `npm run dev` porque ejecuta el script "dev" definido en `package.json`.
 
 La aplicación estará disponible en: **http://localhost:3000**
 

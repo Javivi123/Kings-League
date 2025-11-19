@@ -71,9 +71,13 @@ npx prisma studio
 
 ## 🚀 Desarrollo
 
+**⚠️ IMPORTANTE:** Usa `npm run dev`, NO `npx run dev`
+
 ```bash
 npm run dev
 ```
+
+**Nota:** `npx run dev` intentará instalar un paquete inexistente llamado "run" y fallará. El comando correcto es `npm run dev` porque ejecuta el script "dev" definido en `package.json`.
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 

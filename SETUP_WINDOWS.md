@@ -141,9 +141,13 @@ Esto creará el archivo `dev.db` (base de datos SQLite) y ejecutará las migraci
 
 ### Iniciar el Servidor de Desarrollo
 
+**⚠️ IMPORTANTE:** Usa `npm run dev`, NO `npx run dev`
+
 ```powershell
 npm run dev
 ```
+
+**Nota:** `npx run dev` intentará instalar un paquete inexistente llamado "run" y fallará. El comando correcto es `npm run dev` porque ejecuta el script "dev" definido en `package.json`.
 
 Espera a ver este mensaje:
 ```
