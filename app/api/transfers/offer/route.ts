@@ -66,17 +66,40 @@ export async function POST(request: Request) {
       );
     }
 
+    // Verificar que el equipo destino existe
+    const destinationTeam = await prisma.team.findUnique({
+      where: { id: team.id },
+    });
+
+    if (!destinationTeam) {
+      return NextResponse.json(
+        { error: "Equipo destino no encontrado" },
+        { status: 404 }
+      );
+    }
+
     // Crear la transferencia
-    const transferData: any = {
+    const transferData: {
+      toTeamId: string;
+      playerId: string;
+      price: number;
+      status: string;
+      fromTeamId?: string;
+    } = {
       toTeamId: team.id,
       playerId: validatedData.playerId,
       price: validatedData.price,
       status: "pending",
     };
 
-    // Solo añadir fromTeamId si el jugador tiene equipo
+    // Solo añadir fromTeamId si el jugador tiene equipo y el equipo existe
     if (player.teamId) {
-      transferData.fromTeamId = player.teamId;
+      const sourceTeam = await prisma.team.findUnique({
+        where: { id: player.teamId },
+      });
+      if (sourceTeam) {
+        transferData.fromTeamId = player.teamId;
+      }
     }
 
     const transfer = await prisma.transfer.create({
@@ -104,8 +127,19 @@ export async function POST(request: Request) {
     }
 
     console.error("Error creating offer:", error);
+    
+    // Proporcionar más información del error
+    let errorMessage = "Error al crear la oferta";
+    if (error instanceof Error) {
+      if (error.message.includes("Foreign key constraint")) {
+        errorMessage = "Error: El jugador o equipo no existe en la base de datos";
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return NextResponse.json(
-      { error: "Error al crear la oferta" },
+      { error: errorMessage, details: error instanceof Error ? error.message : "Error desconocido" },
       { status: 500 }
     );
   }
