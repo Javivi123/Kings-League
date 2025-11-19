@@ -4,9 +4,12 @@ import { redirect } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { prisma } from "@/lib/prisma";
-import { TrendingUp, TrendingDown, BarChart3, Users, Trophy, Euro } from "lucide-react";
+import { BarChart3, Newspaper, Calendar, User } from "lucide-react";
 import { DashboardStats } from "@/components/dashboard/DashboardStats";
 import { FloatingIcons } from "@/components/ui/FloatingIcons";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import Link from "next/link";
 
 async function getDashboardData(userId: string, role: string) {
   if (role === "presidente") {
@@ -78,6 +81,19 @@ async function getDashboardData(userId: string, role: string) {
   return null;
 }
 
+async function getNews() {
+  return await prisma.news.findMany({
+    where: { published: true },
+    include: {
+      author: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 5, // Mostrar solo las 5 más recientes
+  });
+}
+
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 
@@ -86,20 +102,7 @@ export default async function DashboardPage() {
   }
 
   const dashboardData = await getDashboardData(session.user.id, session.user.role);
-
-  if (!dashboardData) {
-    return (
-      <>
-        <Navbar />
-        <main className="min-h-screen py-8">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <p>No hay datos disponibles para tu perfil</p>
-          </div>
-        </main>
-        <Footer />
-      </>
-    );
-  }
+  const news = await getNews();
 
   return (
     <>
@@ -109,10 +112,84 @@ export default async function DashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center space-x-3 mb-8 animate-fade-in">
             <BarChart3 className="h-8 w-8 text-blue-kings" />
-            <h1 className="text-4xl font-bold">Dashboard de Estadísticas</h1>
+            <h1 className="text-4xl font-bold">Dashboard</h1>
           </div>
 
-          <DashboardStats data={dashboardData} />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Estadísticas (solo para presidente y jugador) */}
+            {dashboardData && (
+              <div className="lg:col-span-1">
+                <DashboardStats data={dashboardData} />
+              </div>
+            )}
+
+            {/* Noticias (para todos) */}
+            <div className={dashboardData ? "lg:col-span-2" : "lg:col-span-3"}>
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center space-x-3">
+                    <Newspaper className="h-6 w-6 text-blue-kings" />
+                    <h2 className="text-2xl font-bold">Últimas Noticias</h2>
+                  </div>
+                  <Link
+                    href="/news"
+                    className="text-blue-kings hover:text-blue-dark font-medium"
+                  >
+                    Ver todas →
+                  </Link>
+                </div>
+
+                {news.length === 0 ? (
+                  <div className="text-center py-12">
+                    <Newspaper className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600 dark:text-gray-400 text-lg">
+                      No hay noticias disponibles
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {news.map((item) => (
+                      <article
+                        key={item.id}
+                        className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0 last:pb-0"
+                      >
+                        {item.image && (
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-48 object-cover rounded-lg mb-4"
+                          />
+                        )}
+                        <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                          <div className="flex items-center space-x-1">
+                            <User className="h-4 w-4" />
+                            <span>{item.author.name || "Admin"}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{format(new Date(item.createdAt), "d MMMM yyyy", { locale: es })}</span>
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                        <div
+                          className="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none line-clamp-3"
+                          dangerouslySetInnerHTML={{
+                            __html: item.content.substring(0, 200) + "...",
+                          }}
+                        />
+                        <Link
+                          href={`/news#${item.id}`}
+                          className="text-blue-kings hover:text-blue-dark font-medium mt-2 inline-block"
+                        >
+                          Leer más →
+                        </Link>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
