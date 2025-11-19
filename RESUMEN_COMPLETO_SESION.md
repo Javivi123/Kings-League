@@ -2013,7 +2013,8 @@ const stripHtml = (html: string): string => {
 ### 📝 Archivos Modificados
 
 1. **`app/tv/page.tsx`**
-   - Copyright añadido en esquina inferior derecha
+   - Copyright centrado en la parte inferior con formato completo (© {año} Javier Sánchez. Todos los derechos reservados.)
+   - Indicador de slides reposicionado para evitar solapamiento con el copyright
 
 2. **`app/settings/page.tsx`**
    - Botón rediseñado con mejor contraste y visibilidad
@@ -2069,7 +2070,7 @@ Rediseñar completamente el Modo TV para optimizarlo para ChromeCast y pantallas
 - ✅ Fondo monótono → 34 elementos animados
 
 #### 5. **Mejoras Visuales**
-- ✅ Copyright "Javier Sánchez 2025" en esquina inferior derecha
+- ✅ Copyright centrado en la parte inferior con formato completo (© {año} Javier Sánchez. Todos los derechos reservados.) - Estilo similar al footer de la pantalla de inicio
 - ✅ Botón "Abrir Modo TV" mejorado (fondo amarillo, mejor contraste)
 - ✅ Icono de TV integrado en el botón
 
@@ -2156,4 +2157,43 @@ El Modo TV ahora es:
 - Resumen rápido (copy-paste)
 
 **Última actualización:** Noviembre 2025 - Preparación para demo en Windows
+
+---
+
+## 🎨 MEJORA DEL COPYRIGHT EN MODO TV - Diciembre 2025
+
+### 📋 Cambio Solicitado
+Modificar el texto del copyright en la pestaña TV para que:
+- Esté **centrado** (en vez de esquina inferior derecha)
+- Incluya el **signo de copyright (©)**
+- Sea **más parecido al banner del footer** de la pantalla de inicio
+
+### ✅ Implementación
+
+**Antes:**
+- Copyright en esquina inferior derecha: "Javier Sánchez 2025"
+- Sin signo de copyright
+- Texto simple
+
+**Después:**
+- Copyright centrado en la parte inferior
+- Formato completo: "© {año} Javier Sánchez. Todos los derechos reservados."
+- Estilo idéntico al footer (`text-gray-400`, `text-center`)
+- Indicador de slides reposicionado (`bottom-20`) para evitar solapamiento
+
+### 📝 Archivos Modificados
+
+1. **`app/tv/page.tsx`**
+   - Cambiado de `fixed bottom-6 right-6` a `fixed bottom-6 left-1/2 transform -translate-x-1/2 text-center`
+   - Añadido signo de copyright (©) y texto completo
+   - Ajustado indicador de slides a `bottom-20` para evitar conflicto visual
+
+### ✨ Resultado
+
+- ✅ Copyright centrado y profesional
+- ✅ Formato consistente con el footer de la aplicación
+- ✅ Sin solapamiento con otros elementos
+- ✅ Año dinámico (`new Date().getFullYear()`)
+
+**Última actualización:** Diciembre 2025 - Copyright centrado y formateado en Modo TV
 

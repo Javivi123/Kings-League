@@ -248,7 +248,7 @@ export default function TVModePage() {
       </div>
 
       {/* Indicador de slides */}
-      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-40">
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-3 z-40">
         {slides.map((_, index) => (
           <div
             key={index}
@@ -261,9 +261,11 @@ export default function TVModePage() {
         ))}
       </div>
 
-      {/* Copyright en esquina inferior derecha */}
-      <div className="fixed bottom-6 right-6 text-gray-400 text-sm z-40">
-        Javier Sánchez 2025
+      {/* Copyright centrado en la parte inferior */}
+      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 text-center z-40">
+        <p className="text-gray-400 text-sm">
+          © {new Date().getFullYear()} Javier Sánchez. Todos los derechos reservados.
+        </p>
       </div>
 
       {/* Carrusel de contenido */}
