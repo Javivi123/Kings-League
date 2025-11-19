@@ -2197,3 +2197,325 @@ Modificar el texto del copyright en la pestaña TV para que:
 
 **Última actualización:** Diciembre 2025 - Copyright centrado y formateado en Modo TV
 
+---
+
+## 🚀 DESARROLLO MASIVO DE PÁGINAS Y FUNCIONALIDADES - Diciembre 2025
+
+### 📋 Objetivo Principal
+Completar todas las páginas faltantes de la aplicación y añadir funcionalidades detalladas para partidos, similar a las páginas de Google Sports.
+
+### ✅ Páginas Creadas
+
+#### 1. **Páginas Públicas y de Usuario**
+
+##### `/matches` - Lista de Partidos
+- **Funcionalidad:** Lista completa de partidos con filtros por estado
+- **Características:**
+  - Filtros: Todos, Programados, En Vivo, Finalizados
+  - Tarjetas clicables que llevan a la vista detallada
+  - Indicadores visuales de estado (colores y animaciones)
+  - Información de equipos con logos
+  - Resultados en tiempo real para partidos en vivo
+- **Archivo:** `app/matches/page.tsx`
+
+##### `/matches/[id]` - Vista Detallada del Partido
+- **Funcionalidad:** Página completa con toda la información del partido
+- **Características:**
+  - **Scoreboard:** Marcador destacado con logos de equipos
+  - **Goles:** Lista de goles con minuto, jugador y descripción (penalty, etc.)
+  - **Tarjetas:** Amarillas y rojas con minuto y jugador
+  - **Sustituciones:** Jugador que sale → jugador que entra, con minuto
+  - **Alineaciones:**
+    - Titulares por equipo (11 jugadores)
+    - Banquillo (sustitutos)
+    - Números de camiseta
+    - Posiciones (GK, DEF, MID, FWD)
+  - **Estadísticas del Partido:**
+    - Posesión (con barra visual)
+    - Tiros y tiros a puerta
+    - Pases y precisión de pases
+    - Faltas
+    - Saques de esquina
+    - Fueras de juego
+- **Archivo:** `app/matches/[id]/page.tsx`
+- **Inspiración:** Similar a las páginas de Google Sports para partidos de fútbol
+
+##### `/notifications` - Vista Completa de Notificaciones
+- **Funcionalidad:** Página dedicada para ver todas las notificaciones
+- **Características:**
+  - Lista completa de notificaciones
+  - Filtrado por tipo (info, warning, success, error)
+  - Marcar como leída individual o todas
+  - Contador de no leídas
+  - Iconos por tipo de notificación
+- **Archivo:** `app/notifications/page.tsx`
+
+##### `/teams/[id]` - Vista Individual de Equipo
+- **Funcionalidad:** Página detallada de cada equipo
+- **Características:**
+  - Header con logo, nombre y presidente
+  - Estadísticas destacadas (puntos, victorias, empates, derrotas)
+  - Lista completa de jugadores con estadísticas
+  - Partidos recientes
+  - Estadísticas generales (goles a favor/contra, diferencia)
+  - Euros Kings disponibles
+- **Archivo:** `app/teams/[id]/page.tsx`
+
+##### `/dashboard` - Dashboard Mejorado
+- **Funcionalidad:** Fusionado con `/news` para ser útil para todos los roles
+- **Características:**
+  - **Para Presidente y Jugador:** Estadísticas personalizadas (DashboardStats)
+  - **Para Todos:** Últimas 5 noticias destacadas
+  - Layout responsive (1 columna para stats, 2 para noticias)
+  - Enlace a ver todas las noticias
+- **Archivo:** `app/dashboard/page.tsx`
+- **Mejora:** Ya no muestra "No hay datos disponibles" para usuarios sin rol específico
+
+##### `/change-password` - Cambiar Contraseña
+- **Funcionalidad:** Página dedicada para cambiar la contraseña del usuario
+- **Características:**
+  - Validación de contraseña actual
+  - Validación de nueva contraseña (mínimo 6 caracteres)
+  - Confirmación de contraseña
+  - Enlace desde settings
+- **Archivo:** `app/change-password/page.tsx`
+
+##### `/wildcards/request` - Solicitar Wildcard
+- **Funcionalidad:** Página para que presidentes soliciten cartas comodín
+- **Características:**
+  - Formulario con nombre, descripción y efecto deseado
+  - Solo accesible para presidentes
+  - Integración con API de requests
+- **Archivo:** `app/wildcards/request/page.tsx`
+
+#### 2. **Páginas de Administración**
+
+##### `/admin/users/[id]/edit` - Editar Usuario
+- **Funcionalidad:** Editar información de usuarios
+- **Características:**
+  - Editar nombre, email, rol, edad
+  - Cambiar contraseña (opcional)
+  - Validación de email único
+- **Archivos:**
+  - `app/admin/users/[id]/edit/page.tsx`
+  - `app/api/users/[id]/route.ts` (GET y PATCH)
+
+##### `/admin/teams` - Gestión de Equipos
+- **Funcionalidad:** Lista completa de equipos para administración
+- **Características:**
+  - Grid de tarjetas con información de cada equipo
+  - Estadísticas rápidas (puntos, jugadores, victorias, Euros Kings)
+  - Enlaces a vista detallada de cada equipo
+  - Botón para crear nuevo equipo
+- **Archivo:** `app/admin/teams/page.tsx`
+
+##### `/admin/players` - Gestión de Jugadores
+- **Funcionalidad:** Tabla completa de jugadores
+- **Características:**
+  - Tabla con todos los jugadores
+  - Información: nombre, posición, equipo, estadísticas (goles, asistencias, puntos)
+  - Valor de mercado
+  - Enlaces a ficha individual
+  - Botón para crear nuevo jugador
+- **Archivo:** `app/admin/players/page.tsx`
+
+##### `/admin/matches` - Gestión de Partidos
+- **Funcionalidad:** Lista de todos los partidos
+- **Características:**
+  - Lista completa con estado visual
+  - Información de equipos y resultado
+  - Fecha y hora del partido
+  - Botón para crear nuevo partido
+- **Archivo:** `app/admin/matches/page.tsx`
+
+##### `/admin/requests` - Gestión de Solicitudes
+- **Funcionalidad:** Panel para revisar y aprobar/rechazar solicitudes
+- **Características:**
+  - Tabla con todas las solicitudes
+  - Filtrado por estado (pendiente, aprobada, rechazada)
+  - Contador de pendientes
+  - Botones de acción (aprobar/rechazar) para pendientes
+  - Información de usuario y equipo
+- **Archivo:** `app/admin/requests/page.tsx`
+
+##### `/admin/transactions` - Gestión de Transacciones
+- **Funcionalidad:** Panel para revisar transacciones económicas
+- **Características:**
+  - Tabla con todas las transacciones
+  - Tipo de transacción (transfer, wildcard, investment)
+  - Cantidad en Euros Kings
+  - Estado y acciones (aprobar/rechazar)
+  - Contador de pendientes
+- **Archivo:** `app/admin/transactions/page.tsx`
+
+##### `/admin/create-player` - Crear Jugador
+- **Funcionalidad:** Formulario para crear nuevos jugadores
+- **Características:**
+  - Nombre, posición, precio, valor de mercado
+  - Asignación a equipo (opcional)
+  - Vinculación con usuario (opcional)
+  - Edad y foto (opcionales)
+  - Crea estadísticas iniciales automáticamente
+- **Archivos:**
+  - `app/admin/create-player/page.tsx`
+  - `app/api/players/route.ts` (POST añadido)
+
+##### `/admin/create-team` - Crear Equipo
+- **Funcionalidad:** Formulario para crear nuevos equipos
+- **Características:**
+  - Nombre y logo del equipo
+  - Selección de presidente (usuario sin equipo)
+  - Euros Kings iniciales (por defecto 1000)
+  - Validación de usuario único por equipo
+- **Archivos:**
+  - `app/admin/create-team/page.tsx`
+  - `app/api/teams/route.ts` (POST añadido)
+
+##### `/admin/create-match` - Crear Partido
+- **Funcionalidad:** Formulario para crear nuevos partidos
+- **Características:**
+  - Selección de equipos (local y visitante)
+  - Fecha y hora del partido
+  - Estado inicial (programado, en vivo, finalizado)
+  - Validación de equipos diferentes
+- **Archivos:**
+  - `app/admin/create-match/page.tsx`
+  - `app/api/matches/route.ts` (POST añadido)
+
+##### `/admin/suspensions/create` - Crear Suspensión
+- **Funcionalidad:** Formulario para crear suspensiones de jugadores
+- **Características:**
+  - Selección de jugador
+  - Razón de la suspensión
+  - Número de partidos suspendido
+  - Fecha de inicio (fecha de fin calculada automáticamente)
+- **Archivos:**
+  - `app/admin/suspensions/create/page.tsx`
+  - `app/api/suspensions/route.ts` (nuevo)
+
+##### `/admin/auction` - Gestión de Subastas
+- **Funcionalidad:** Vista de todas las subastas activas y cerradas
+- **Características:**
+  - Grid de tarjetas con información de cada subasta
+  - Estado visual (activa, cerrada, vendida)
+  - Información del jugador y equipo ofertante
+  - Precio inicial y puja actual
+  - Fecha de finalización
+  - Contador de subastas activas
+- **Archivo:** `app/admin/auction/page.tsx`
+
+##### `/admin/awards/create` - Crear Premio
+- **Funcionalidad:** Formulario para crear premios de temporada
+- **Características:**
+  - Temporada (ej: 2024-2025)
+  - Categoría del premio
+  - Tipo de ganador (jugador, equipo, usuario)
+  - Selección del ganador (opcional, puede asignarse después)
+  - Descripción adicional
+- **Archivos:**
+  - `app/admin/awards/create/page.tsx`
+  - `app/api/awards/route.ts` (nuevo)
+
+### 🗄️ Extensión del Schema de Prisma
+
+Se añadieron **3 nuevos modelos** para soportar información detallada de partidos:
+
+#### `MatchEvent`
+- Almacena eventos del partido (goles, tarjetas, sustituciones)
+- Campos: `type`, `minute`, `playerId`, `teamId`, `description`, `playerOutId`
+- Relaciones con `Match`, `Player`, `Team`
+
+#### `MatchLineup`
+- Almacena alineaciones (titulares y banquillo)
+- Campos: `teamId`, `playerId`, `position`, `isStarter`, `shirtNumber`
+- Relaciones con `Match`, `Team`, `Player`
+
+#### `MatchStats`
+- Almacena estadísticas detalladas del partido
+- Campos: posesión, tiros, pases, faltas, saques de esquina, fueras de juego
+- Separado por equipo local y visitante
+- Relación única con `Match`
+
+### 📝 APIs Creadas/Actualizadas
+
+1. **`/api/users/[id]`** - GET y PATCH para obtener y actualizar usuarios
+2. **`/api/players`** - POST añadido para crear jugadores
+3. **`/api/teams`** - POST añadido para crear equipos
+4. **`/api/matches`** - POST añadido para crear partidos
+5. **`/api/requests`** - POST para crear solicitudes
+6. **`/api/suspensions`** - GET y POST para gestionar suspensiones
+7. **`/api/awards`** - GET y POST para gestionar premios
+
+### 🎨 Mejoras de UI/UX
+
+- **Partidos clicables:** Todos los partidos en `/matches` ahora son enlaces a la vista detallada
+- **Indicadores visuales:** Estados de partidos con colores y animaciones
+- **Layouts responsive:** Grids adaptativos para diferentes tamaños de pantalla
+- **Información completa:** Todas las páginas muestran información relevante y útil
+
+### 📊 Estadísticas de la Sesión
+
+- **Páginas creadas:** 18
+- **APIs creadas/actualizadas:** 7
+- **Modelos de Prisma añadidos:** 3
+- **Líneas de código añadidas:** ~3500+
+- **Funcionalidades completadas:** 100% de las páginas solicitadas
+
+### ⚠️ Importante: Migración de Base de Datos
+
+**Antes de usar las nuevas funcionalidades, ejecutar:**
+
+```bash
+npx prisma migrate dev --name add_match_details
+npx prisma generate
+```
+
+Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la base de datos.
+
+### 📁 Archivos Clave Creados
+
+**Páginas Públicas:**
+- `app/matches/page.tsx`
+- `app/matches/[id]/page.tsx`
+- `app/notifications/page.tsx`
+- `app/teams/[id]/page.tsx`
+- `app/change-password/page.tsx`
+- `app/wildcards/request/page.tsx`
+
+**Páginas de Admin:**
+- `app/admin/users/[id]/edit/page.tsx`
+- `app/admin/teams/page.tsx`
+- `app/admin/players/page.tsx`
+- `app/admin/matches/page.tsx`
+- `app/admin/requests/page.tsx`
+- `app/admin/transactions/page.tsx`
+- `app/admin/create-player/page.tsx`
+- `app/admin/create-team/page.tsx`
+- `app/admin/create-match/page.tsx`
+- `app/admin/suspensions/create/page.tsx`
+- `app/admin/auction/page.tsx`
+- `app/admin/awards/create/page.tsx`
+
+**APIs:**
+- `app/api/users/[id]/route.ts`
+- `app/api/players/route.ts` (actualizado)
+- `app/api/teams/route.ts` (actualizado)
+- `app/api/matches/route.ts` (actualizado)
+- `app/api/requests/route.ts`
+- `app/api/suspensions/route.ts`
+- `app/api/awards/route.ts`
+
+**Schema:**
+- `prisma/schema.prisma` (extendido con 3 nuevos modelos)
+
+### ✨ Resultado Final
+
+- ✅ **Todas las páginas solicitadas creadas**
+- ✅ **Sistema completo de gestión de partidos detallados**
+- ✅ **APIs funcionales para todas las operaciones CRUD**
+- ✅ **Base de datos extendida para soportar información detallada**
+- ✅ **UI/UX consistente y profesional**
+- ✅ **Navegación fluida entre páginas relacionadas**
+
+**Última actualización:** Diciembre 2025 - Desarrollo masivo de páginas y funcionalidades completado
+
