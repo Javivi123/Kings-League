@@ -125,68 +125,67 @@ export default async function DashboardPage() {
 
             {/* Noticias (para todos) */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center space-x-3">
-                    <Newspaper className="h-6 w-6 text-blue-kings" />
-                    <h2 className="text-2xl font-bold">Últimas Noticias</h2>
-                  </div>
-                  <Link
-                    href="/news"
-                    className="text-blue-kings hover:text-blue-dark font-medium"
-                  >
-                    Ver todas →
-                  </Link>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center space-x-3">
+                  <Newspaper className="h-6 w-6 text-blue-kings" />
+                  <h2 className="text-2xl font-bold">Últimas Noticias</h2>
                 </div>
-
-                {news.length === 0 ? (
-                  <div className="text-center py-12">
-                    <Newspaper className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600 dark:text-gray-400 text-lg">
-                      No hay noticias disponibles
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    {news.map((item) => (
-                      <article
-                        key={item.id}
-                        className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0 last:pb-0"
-                      >
-                        {item.image && (
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-48 object-cover rounded-lg mb-4"
-                          />
-                        )}
-                        <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
-                          <div className="flex items-center space-x-1">
-                            <User className="h-4 w-4" />
-                            <span>{item.author.name || "Admin"}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="h-4 w-4" />
-                            <span>{format(new Date(item.createdAt), "d MMMM yyyy", { locale: es })}</span>
-                          </div>
-                        </div>
-                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                        <div
-                          className="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none line-clamp-3"
-                          dangerouslySetInnerHTML={{
-                            __html: item.content.substring(0, 200) + "...",
-                          }}
-                        />
-                        <Link
-                          href={`/news#${item.id}`}
-                          className="text-blue-kings hover:text-blue-dark font-medium mt-2 inline-block"
-                        >
-                          Leer más →
-                        </Link>
-                      </article>
-                    ))}
-                  </div>
-                )}
+                <Link
+                  href="/news"
+                  className="text-blue-kings hover:text-blue-dark font-medium"
+                >
+                  Ver todas →
+                </Link>
               </div>
+
+              {news.length === 0 ? (
+                <div className="text-center py-12">
+                  <Newspaper className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">
+                    No hay noticias disponibles
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {news.map((item) => (
+                    <article
+                      key={item.id}
+                      className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0 last:pb-0"
+                    >
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-48 object-cover rounded-lg mb-4"
+                        />
+                      )}
+                      <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <div className="flex items-center space-x-1">
+                          <User className="h-4 w-4" />
+                          <span>{item.author.name || "Admin"}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>{format(new Date(item.createdAt), "d MMMM yyyy", { locale: es })}</span>
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                      <div
+                        className="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none line-clamp-3"
+                        dangerouslySetInnerHTML={{
+                          __html: item.content.substring(0, 200) + "...",
+                        }}
+                      />
+                      <Link
+                        href={`/news#${item.id}`}
+                        className="text-blue-kings hover:text-blue-dark font-medium mt-2 inline-block"
+                      >
+                        Leer más →
+                      </Link>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
