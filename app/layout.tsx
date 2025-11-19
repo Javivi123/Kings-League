@@ -10,10 +10,7 @@ export const metadata: Metadata = {
   description: "Aplicación de fantasy league para la Kings League",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", type: "image/x-icon" },
-    ],
+    icon: "/favicon.svg",
   },
 };
 
