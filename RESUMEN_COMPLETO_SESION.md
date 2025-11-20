@@ -2867,3 +2867,80 @@ Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la ba
 
 **Última actualización:** Diciembre 2025 - Corrección final de todos los fallos reportados
 
+---
+
+## 🎯 Mejoras en Página de Detalles de Partido y Corrección de Wildcards
+
+### 📅 Fecha: Diciembre 2025
+
+### ✅ Cambios Realizados
+
+#### 1. **Corrección de Error en `/api/requests`**
+- **Problema:** Error "Cannot access 'request' before initialization" al crear solicitudes de wildcard
+- **Solución:** Renombrada variable local `request` a `newRequest` para evitar conflicto con el parámetro de función
+- **Archivo:** `app/api/requests/route.ts`
+- **Línea afectada:** Línea 60
+
+#### 2. **Mejora Completa de Página `/matches/[id]`**
+- **Diseño:** Rediseñada completamente con estilo similar a Google
+- **Características añadidas:**
+  - Timeline visual de eventos del partido
+  - Alineaciones mejoradas con separación clara entre titulares y banquillo
+  - Estadísticas visuales con barras de progreso
+  - Diseño más limpio y profesional
+  - Mejor organización de la información
+  - Iconos y colores para diferentes tipos de eventos
+- **Archivo:** `app/matches/[id]/page.tsx`
+
+#### 3. **Script para Añadir Datos de Prueba**
+- **Nuevo script:** `scripts/add-match-details.js`
+- **Funcionalidad:**
+  - Añade eventos (goles, tarjetas, sustituciones) a partidos finalizados
+  - Crea alineaciones (titulares y banquillo) para ambos equipos
+  - Genera estadísticas del partido (posesión, tiros, pases, etc.)
+  - Distribuye eventos de forma realista según el resultado del partido
+- **Comando:** `npm run db:add-match-details`
+- **Añadido a:** `package.json`
+
+### 🔧 Detalles Técnicos
+
+**Estructura de Eventos:**
+- Goles con minutos realistas (5-90')
+- Tarjetas amarillas (2-6 por partido)
+- Tarjetas rojas (0-2 por partido, probabilidad 30%)
+- Sustituciones (3-5 por equipo, después del minuto 45)
+
+**Alineaciones:**
+- 9 titulares por equipo (GK, DEF, DEF, DEF, MID, MID, MID, FWD, FWD)
+- 6 jugadores en banquillo
+- Números de camiseta asignados automáticamente
+
+**Estadísticas Generadas:**
+- Posesión (45-60% para equipo local)
+- Tiros (6-18 por equipo)
+- Tiros a puerta (3-10 por equipo)
+- Pases (250-500 por equipo)
+- Precisión de pases (70-90%)
+- Faltas (7-16 por equipo)
+- Saques de esquina (2-8 por equipo)
+- Fueras de juego (1-4 por equipo)
+
+### 📝 Archivos Modificados/Creados
+
+1. `app/api/requests/route.ts` - Corrección de variable
+2. `app/matches/[id]/page.tsx` - Rediseño completo
+3. `scripts/add-match-details.js` - Nuevo script
+4. `package.json` - Añadido script `db:add-match-details`
+
+### 🎨 Mejoras de UI/UX
+
+- Diseño más limpio y profesional
+- Timeline visual de eventos
+- Estadísticas con barras de progreso
+- Mejor separación visual entre equipos
+- Iconos para diferentes tipos de eventos
+- Colores diferenciados por tipo de evento
+- Layout responsive mejorado
+
+**Última actualización:** Diciembre 2025 - Mejora de página de detalles de partido y corrección de wildcards
+

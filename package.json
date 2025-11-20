@@ -12,7 +12,8 @@
     "db:create-admin": "node scripts/create-admin.js",
     "db:seed": "node scripts/seed-data.js",
     "db:reset-tutorial": "node scripts/reset-tutorial.js",
-    "db:reset-password": "node scripts/reset-password.js"
+    "db:reset-password": "node scripts/reset-password.js",
+    "db:add-match-details": "node scripts/add-match-details.js"
   },
   "dependencies": {
     "next": "14.2.5",

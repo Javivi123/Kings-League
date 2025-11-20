@@ -57,11 +57,11 @@ export async function POST(request: Request) {
       requestData.teamId = teamId;
     }
 
-    const request = await prisma.request.create({
+    const newRequest = await prisma.request.create({
       data: requestData,
     });
 
-    return NextResponse.json(request, { status: 201 });
+    return NextResponse.json(newRequest, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
