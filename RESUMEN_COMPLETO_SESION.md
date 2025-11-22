@@ -2944,3 +2944,126 @@ Esto creará las tablas `match_events`, `match_lineups` y `match_stats` en la ba
 
 **Última actualización:** Diciembre 2025 - Mejora de página de detalles de partido y corrección de wildcards
 
+
+---
+
+## 📰 SISTEMA DE NOTICIAS TIPO BLOG - Diciembre 2025
+
+### 📋 Objetivo Principal
+Transformar el sistema de noticias en un blog completo donde las noticias se pueden abrir individualmente con diseño tipo blog, y permitir al admin crear noticias con contenido completo.
+
+### ✅ Funcionalidades Implementadas
+
+#### 1. **Vista Detallada de Noticia (`/news/[id]`)**
+- **Diseño tipo blog** inspirado en blogs profesionales
+- **Imagen destacada** grande y responsive
+- **Título grande** (4xl-5xl) para impacto visual
+- **Contenido HTML formateado** con estilos de prose
+- **Metadata completa:**
+  - Autor con icono
+  - Fecha de publicación en español
+  - Tiempo de lectura calculado automáticamente
+- **Botón para volver** a la lista de noticias
+- **Separador final** con fecha completa y enlace
+- **Responsive** optimizado para móvil, tablet y desktop
+
+#### 2. **Página de Noticias Actualizada (`/news`)**
+- **Resúmenes de 200 caracteres** en lugar de contenido completo
+- **Noticias clicables** que llevan a la vista detallada
+- **Imágenes de preview** en las tarjetas
+- **Indicador "Leer más"** para invitar a hacer clic
+- **Hover effects** mejorados
+- **Layout limpio** y organizado
+
+#### 3. **Panel de Admin para Crear Noticias (`/admin/news/create`)**
+- **Formulario completo** con:
+  - Título (requerido)
+  - URL de imagen (opcional, con preview en tiempo real)
+  - Contenido HTML (requerido, con soporte para etiquetas HTML básicas)
+  - Checkbox para publicar inmediatamente
+- **Validación** en frontend y backend
+- **Mensajes de error** descriptivos
+- **Redirección** al panel de admin tras crear
+- **Notificaciones toast** para feedback
+
+#### 4. **API Actualizada (`/api/news`)**
+- **GET:** Obtener noticias (ya existía, mejorado)
+- **POST:** Crear noticias (nuevo)
+  - Validación con Zod
+  - Protección: solo admin puede crear
+  - Auto-asignación del autor (usuario autenticado)
+  - Manejo de imagen opcional
+
+#### 5. **Enlace en Panel de Admin**
+- **Botón "Crear Noticia"** añadido en acciones rápidas
+- **Color púrpura** para diferenciarlo
+- **Acceso directo** desde el panel principal
+
+### 📝 Archivos Creados/Modificados
+
+**Páginas Creadas:**
+- `app/news/[id]/page.tsx` - Vista detallada tipo blog
+- `app/admin/news/create/page.tsx` - Formulario para crear noticias
+
+**Páginas Modificadas:**
+- `app/news/page.tsx` - Actualizado para mostrar resúmenes y hacer noticias clicables
+- `app/admin/page.tsx` - Añadido enlace "Crear Noticia"
+
+**APIs Modificadas:**
+- `app/api/news/route.ts` - Añadido método POST para crear noticias
+
+### 🎨 Características del Diseño
+
+**Vista Detallada:**
+- Tipografía grande y legible (prose-lg)
+- Estilos de prose personalizados para modo oscuro
+- Imagen destacada con Next.js Image (optimizada)
+- Metadata visual con iconos
+- Tiempo de lectura calculado (200 palabras/minuto)
+- Fechas en español con formato completo
+
+**Formulario de Creación:**
+- Inputs con validación visual
+- Preview de imagen en tiempo real
+- Textarea grande para contenido HTML
+- Checkbox para publicar inmediatamente
+- Botones con estados de loading
+- Mensajes de ayuda para cada campo
+
+### 🔧 Detalles Técnicos
+
+**Cálculo de Tiempo de Lectura:**
+- Extrae texto plano del HTML
+- Cuenta palabras (split por espacios)
+- Divide entre 200 (palabras por minuto estándar)
+- Redondea hacia arriba
+
+**Validación:**
+- Frontend: HTML5 required attributes
+- Backend: Zod schema con mensajes personalizados
+- URL de imagen: Validación opcional con regex de URL
+
+**Soporte HTML:**
+- Etiquetas permitidas: `<p>`, `<h1>`, `<h2>`, `<h3>`, `<strong>`, `<em>`, `<ul>`, `<ol>`, `<li>`, `<blockquote>`, `<code>`, `<pre>`, `<img>`
+- Sanitización automática por React (dangerouslySetInnerHTML)
+- Estilos aplicados con Tailwind prose classes
+
+### 📊 Estadísticas
+
+- **Páginas creadas:** 2
+- **Páginas modificadas:** 2
+- **APIs modificadas:** 1
+- **Líneas de código añadidas:** ~600
+- **Funcionalidades:** Sistema completo de blog
+
+### ✨ Resultado Final
+
+- ✅ **Noticias tipo blog** con diseño profesional
+- ✅ **Vista detallada** completa con toda la información
+- ✅ **Panel de admin** para crear noticias fácilmente
+- ✅ **Navegación fluida** entre lista y detalle
+- ✅ **Responsive** en todos los dispositivos
+- ✅ **Soporte HTML** para contenido rico
+
+**Última actualización:** Diciembre 2025 - Sistema de noticias tipo blog implementado
+
