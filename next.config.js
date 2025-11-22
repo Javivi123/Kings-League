@@ -7,9 +7,9 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   // Optimizar compilación
-  experimental: {
-    optimizeCss: true,
-  },
+  // experimental: {
+  //   optimizeCss: true, // Deshabilitado temporalmente por problemas de build
+  // },
 }
 
 module.exports = nextConfig
