@@ -22,19 +22,47 @@ npm install
 
 ## ✅ Paso 3: Configurar Variables de Entorno
 
-Crea el archivo `.env` copiando el ejemplo:
+Crea el archivo `.env` con el siguiente comando (genera automáticamente un `NEXTAUTH_SECRET` seguro):
 
 ```bash
-cp .env.example .env
+cd "/Users/javier/Desktop/new/Kings League"
+cat > .env << 'EOF'
+# Database
+DATABASE_URL="file:./dev.db"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="$(openssl rand -base64 32)"
+EOF
 ```
 
-Luego edita `.env` y cambia el `NEXTAUTH_SECRET` por uno seguro. Puedes generar uno con:
+**Nota:** El comando anterior creará el archivo `.env` pero el `NEXTAUTH_SECRET` se generará como literal. Para generar un secreto único, ejecuta primero:
 
 ```bash
 openssl rand -base64 32
 ```
 
-O simplemente usa cualquier cadena larga y aleatoria.
+Y luego crea el archivo `.env` manualmente con ese valor, o usa este método alternativo:
+
+```bash
+# Generar el secreto
+SECRET=$(openssl rand -base64 32)
+
+# Crear el archivo .env
+cat > .env << EOF
+# Database
+DATABASE_URL="file:./dev.db"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="${SECRET}"
+EOF
+```
+
+**Verificar que se creó correctamente:**
+```bash
+cat .env
+```
 
 ## ✅ Paso 4: Configurar Base de Datos
 
