@@ -70,7 +70,7 @@ export function Navbar() {
             })}
             {session ? (
               <button
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: '/' })}
                 className="flex items-center space-x-1 px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition-colors whitespace-nowrap text-sm"
               >
                 <LogOut className="h-4 w-4" />
@@ -131,7 +131,7 @@ export function Navbar() {
             {session ? (
               <button
                 onClick={() => {
-                  signOut();
+                  signOut({ callbackUrl: '/' });
                   setMobileMenuOpen(false);
                 }}
                 className="flex items-center space-x-2 px-3 py-2 rounded-lg text-gray-300 hover:bg-gray-800 w-full"
