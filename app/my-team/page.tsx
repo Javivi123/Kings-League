@@ -84,11 +84,11 @@ export default async function MyTeamPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+        <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Crown className="h-16 w-16 text-gold-kings mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">No tienes un equipo registrado</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-gray-400 mb-6">
               Contacta con un administrador para registrar tu equipo.
             </p>
             <Link
@@ -107,7 +107,7 @@ export default async function MyTeamPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header del Equipo */}
           <div className="bg-gradient-to-r from-blue-kings to-blue-dark rounded-2xl shadow-lg p-8 mb-6 text-white">
@@ -138,27 +138,27 @@ export default async function MyTeamPage() {
 
           {/* Estadísticas del Equipo */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 text-center">
               <div className="text-3xl font-bold text-blue-kings">{team.points}</div>
-              <div className="text-sm text-gray-700 dark:text-gray-300">Puntos</div>
+              <div className="text-sm text-gray-300">Puntos</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 text-center">
               <div className="text-3xl font-bold text-green-500">{team.wins}</div>
-              <div className="text-sm text-gray-700 dark:text-gray-300">Victorias</div>
+              <div className="text-sm text-gray-300">Victorias</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 text-center">
               <div className="text-3xl font-bold text-gold-kings">{team.totalGoals}</div>
-              <div className="text-sm text-gray-700 dark:text-gray-300">Goles</div>
+              <div className="text-sm text-gray-300">Goles</div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gray-800 rounded-xl shadow-lg p-6 text-center">
               <div className="text-3xl font-bold text-purple-500">{team.players.length}</div>
-              <div className="text-sm text-gray-700 dark:text-gray-300">Jugadores</div>
+              <div className="text-sm text-gray-300">Jugadores</div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Jugadores */}
-            <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="lg:col-span-2 bg-gray-800 rounded-2xl shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold flex items-center space-x-2">
                   <Users className="h-6 w-6 text-blue-kings" />
@@ -177,7 +177,7 @@ export default async function MyTeamPage() {
                   <Link
                     key={player.id}
                     href={`/players/${player.id}`}
-                    className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow"
+                    className="flex items-center justify-between p-4 border border-gray-700 rounded-lg hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center space-x-4">
                       {player.photo ? (
@@ -193,7 +193,7 @@ export default async function MyTeamPage() {
                       )}
                       <div>
                         <div className="font-semibold">{player.name}</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                           {player.position}
                         </div>
                       </div>
@@ -222,7 +222,7 @@ export default async function MyTeamPage() {
             <div className="space-y-6">
               {/* Próximos Partidos */}
               {team.upcomingMatches.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+                <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                   <h2 className="text-2xl font-bold mb-4 flex items-center space-x-2">
                     <Calendar className="h-6 w-6 text-blue-kings" />
                     <span>Próximos Partidos</span>
@@ -233,12 +233,12 @@ export default async function MyTeamPage() {
                       return (
                         <div
                           key={match.id}
-                          className="border border-gray-200 dark:border-gray-700 rounded-lg p-3"
+                          className="border border-gray-700 rounded-lg p-3"
                         >
                           <div className="font-semibold text-sm">
                             {match.isHome ? "vs" : "@"} {opponent.name}
                           </div>
-                          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                          <div className="text-xs text-gray-400 mt-1">
                             {new Date(match.matchDate).toLocaleDateString("es-ES", {
                               day: "numeric",
                               month: "short",
@@ -254,7 +254,7 @@ export default async function MyTeamPage() {
               )}
 
               {/* Cartas Comodín */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-4 flex items-center space-x-2">
                   <Crown className="h-6 w-6 text-gold-kings" />
                   <span>Cartas Comodín</span>
@@ -266,7 +266,7 @@ export default async function MyTeamPage() {
                       className="p-3 bg-gold-kings/10 rounded-lg border border-gold-kings/20"
                     >
                       <div className="font-semibold">{card.name}</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
+                      <div className="text-sm text-gray-400">
                         {card.description}
                       </div>
                     </div>
@@ -286,7 +286,7 @@ export default async function MyTeamPage() {
               </div>
 
               {/* Acciones Rápidas */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-4">Acciones</h2>
                 <div className="space-y-2">
                   <Link

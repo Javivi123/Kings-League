@@ -22,14 +22,14 @@ export default async function StandingsPage() {
     if (position === 1) return "bg-gold-kings text-white";
     if (position === 2) return "bg-gray-300 text-gray-800";
     if (position === 3) return "bg-orange-400 text-white";
-    return "bg-white dark:bg-gray-800";
+    return "bg-gray-800";
   };
 
   const getSecondaryTextColor = (position: number) => {
     if (position === 1) return "text-white/80";
     if (position === 2) return "text-gray-700";
     if (position === 3) return "text-white/80";
-    return "text-gray-600 dark:text-gray-400";
+    return "text-gray-400";
   };
 
   const getMedalColor = (position: number) => {
@@ -49,14 +49,14 @@ export default async function StandingsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Trophy className="h-8 w-8 text-gold-kings" />
             <h1 className="text-4xl font-bold">Clasificación</h1>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-black-kings text-white">
@@ -77,7 +77,7 @@ export default async function StandingsPage() {
                   {teams.map((team, index) => (
                     <tr
                       key={team.id}
-                      className={`border-b border-gray-200 dark:border-gray-700 ${getPositionColor(index + 1)}`}
+                      className={`border-b border-gray-700 ${getPositionColor(index + 1)}`}
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-2">
@@ -135,7 +135,7 @@ export default async function StandingsPage() {
           {teams.length === 0 && (
             <div className="text-center py-12">
               <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay equipos en la clasificación aún
               </p>
             </div>

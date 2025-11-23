@@ -80,7 +80,7 @@ export default function MatchesPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Calendar className="h-8 w-8 text-blue-kings" />
@@ -96,7 +96,7 @@ export default function MatchesPage() {
                 className={`px-4 py-2 rounded-lg transition-colors ${
                   filter === f
                     ? "bg-blue-kings text-white"
-                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                 }`}
               >
                 {f === "all"
@@ -113,12 +113,12 @@ export default function MatchesPage() {
           {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-kings mx-auto"></div>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando partidos...</p>
+              <p className="mt-4 text-gray-400">Cargando partidos...</p>
             </div>
           ) : matches.length === 0 ? (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay partidos {filter !== "all" ? getStatusText(filter) : ""}
               </p>
             </div>
@@ -128,7 +128,7 @@ export default function MatchesPage() {
                 <Link
                   href={`/matches/${match.id}`}
                   key={match.id}
-                  className="block bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                  className="block bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
@@ -139,7 +139,7 @@ export default function MatchesPage() {
                       >
                         {getStatusText(match.status)}
                       </span>
-                      <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 text-sm">
+                      <div className="flex items-center space-x-1 text-gray-400 text-sm">
                         <Clock className="h-4 w-4" />
                         <span>
                           {format(new Date(match.matchDate), "d MMMM yyyy 'a las' HH:mm", {

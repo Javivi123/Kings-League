@@ -95,17 +95,17 @@ export default function CustomizeTeamPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/my-team"
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>Volver a Mi Equipo</span>
           </Link>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8">
             <div className="flex items-center space-x-3 mb-6">
               <Palette className="h-6 w-6 text-gold-kings" />
               <h1 className="text-3xl font-bold">Personalizar Equipo</h1>
@@ -114,7 +114,7 @@ export default function CustomizeTeamPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Logo */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Logo del Equipo
                 </label>
                 <div className="flex items-center space-x-4">
@@ -146,7 +146,7 @@ export default function CustomizeTeamPage() {
 
               {/* Nombre */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Nombre del Equipo
                 </label>
                 <input
@@ -156,14 +156,14 @@ export default function CustomizeTeamPage() {
                     setTeamData({ ...teamData, name: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
 
               {/* Colores */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Color Principal
                   </label>
                   <div className="flex items-center space-x-3">
@@ -187,13 +187,13 @@ export default function CustomizeTeamPage() {
                           primaryColor: e.target.value,
                         })
                       }
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="flex-1 px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Color Secundario
                   </label>
                   <div className="flex items-center space-x-3">
@@ -217,14 +217,14 @@ export default function CustomizeTeamPage() {
                           secondaryColor: e.target.value,
                         })
                       }
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      className="flex-1 px-4 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Preview */}
-              <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div className="p-6 border border-gray-700 rounded-lg">
                 <h3 className="font-semibold mb-4">Vista Previa</h3>
                 <div
                   className="p-6 rounded-lg text-white"

@@ -58,7 +58,7 @@ export default function WalletPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold mb-8 flex items-center space-x-3">
             <Euro className="h-8 w-8 text-gold-kings" />
@@ -72,7 +72,7 @@ export default function WalletPage() {
           </div>
 
           {/* Transactions */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
               <ArrowRightLeft className="h-6 w-6 text-blue-kings" />
               <span>Historial de Transacciones</span>
@@ -85,7 +85,7 @@ export default function WalletPage() {
                 {transactions.map((tx) => (
                   <div
                     key={tx.id}
-                    className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
+                    className="flex items-center justify-between p-4 border border-gray-700 rounded-lg"
                   >
                     <div className="flex items-center space-x-4">
                       {tx.type === "transfer" || tx.type === "investment" ? (
@@ -95,7 +95,7 @@ export default function WalletPage() {
                       )}
                       <div>
                         <div className="font-semibold">{tx.description}</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                           {format(new Date(tx.createdAt), "d MMM yyyy, HH:mm")}
                         </div>
                       </div>

@@ -95,13 +95,13 @@ export default function NotificationsPage() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case "warning":
-        return "border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20";
+        return "border-yellow-500 bg-yellow-900/20";
       case "error":
-        return "border-red-500 bg-red-50 dark:bg-red-900/20";
+        return "border-red-500 bg-red-900/20";
       case "success":
-        return "border-green-500 bg-green-50 dark:bg-green-900/20";
+        return "border-green-500 bg-green-900/20";
       default:
-        return "border-blue-500 bg-blue-50 dark:bg-blue-900/20";
+        return "border-blue-500 bg-blue-900/20";
     }
   };
 
@@ -112,7 +112,7 @@ export default function NotificationsPage() {
         <main className="min-h-screen py-8">
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-kings mx-auto"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando...</p>
+            <p className="mt-4 text-gray-400">Cargando...</p>
           </div>
         </main>
         <Footer />
@@ -125,7 +125,7 @@ export default function NotificationsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
@@ -150,12 +150,12 @@ export default function NotificationsPage() {
           {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-kings mx-auto"></div>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando notificaciones...</p>
+              <p className="mt-4 text-gray-400">Cargando notificaciones...</p>
             </div>
           ) : notifications.length === 0 ? (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Bell className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No tienes notificaciones
               </p>
             </div>
@@ -164,7 +164,7 @@ export default function NotificationsPage() {
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className={`bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border-l-4 ${
+                  className={`bg-gray-800 rounded-2xl shadow-lg p-6 border-l-4 ${
                     notification.read
                       ? "opacity-60"
                       : getTypeColor(notification.type)
@@ -181,7 +181,7 @@ export default function NotificationsPage() {
                             className={`text-lg font-semibold ${
                               notification.read
                                 ? "text-gray-500"
-                                : "text-gray-900 dark:text-white"
+                                : "text-white"
                             }`}
                           >
                             {notification.title}
@@ -190,12 +190,12 @@ export default function NotificationsPage() {
                             className={`mt-1 ${
                               notification.read
                                 ? "text-gray-400"
-                                : "text-gray-700 dark:text-gray-300"
+                                : "text-gray-300"
                             }`}
                           >
                             {notification.message}
                           </p>
-                          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                          <p className="mt-2 text-sm text-gray-400">
                             {format(new Date(notification.createdAt), "d MMMM yyyy 'a las' HH:mm", {
                               locale: es,
                             })}
@@ -204,7 +204,7 @@ export default function NotificationsPage() {
                         {!notification.read && (
                           <button
                             onClick={() => markAsRead(notification.id)}
-                            className="ml-4 px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                            className="ml-4 px-3 py-1 text-sm bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-colors"
                             title="Marcar como leída"
                           >
                             <Check className="h-4 w-4" />

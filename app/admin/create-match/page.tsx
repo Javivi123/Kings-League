@@ -98,17 +98,17 @@ export default function CreateMatchPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/admin/matches"
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>Volver a Partidos</span>
           </Link>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8">
             <div className="flex items-center space-x-3 mb-6">
               <Calendar className="h-8 w-8 text-blue-kings" />
               <h1 className="text-3xl font-bold">Crear Nuevo Partido</h1>
@@ -117,7 +117,7 @@ export default function CreateMatchPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Equipo Local
                   </label>
                   <select
@@ -126,7 +126,7 @@ export default function CreateMatchPage() {
                       setFormData({ ...formData, homeTeamId: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   >
                     <option value="">Seleccionar equipo</option>
                     {teams.map((team) => (
@@ -137,7 +137,7 @@ export default function CreateMatchPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Equipo Visitante
                   </label>
                   <select
@@ -146,7 +146,7 @@ export default function CreateMatchPage() {
                       setFormData({ ...formData, awayTeamId: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   >
                     <option value="">Seleccionar equipo</option>
                     {teams.map((team) => (
@@ -160,7 +160,7 @@ export default function CreateMatchPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Fecha
                   </label>
                   <input
@@ -170,11 +170,11 @@ export default function CreateMatchPage() {
                       setFormData({ ...formData, matchDate: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Hora
                   </label>
                   <input
@@ -184,13 +184,13 @@ export default function CreateMatchPage() {
                       setFormData({ ...formData, matchTime: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Estado
                 </label>
                 <select
@@ -198,7 +198,7 @@ export default function CreateMatchPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, status: e.target.value })
                   }
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                 >
                   <option value="scheduled">Programado</option>
                   <option value="live">En Vivo</option>

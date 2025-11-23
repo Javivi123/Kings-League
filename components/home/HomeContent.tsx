@@ -79,7 +79,7 @@ export async function HomeContent() {
   ]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings relative overflow-hidden">
       <SparkleEffect />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         {/* Hero Section */}
@@ -87,7 +87,7 @@ export async function HomeContent() {
           <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-kings via-red-kings to-gold-kings bg-clip-text text-transparent leading-tight pb-2">
             👑 Kings League
           </h1>
-          <p className="text-xl text-gray-700 dark:text-gray-300">
+          <p className="text-xl text-gray-300">
             La liga fantasy del colegio
           </p>
         </div>
@@ -132,7 +132,7 @@ export async function HomeContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Matches */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-slide-in hover-lift">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-slide-in hover-lift">
             <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
               <Trophy className="h-6 w-6 text-gold-kings" />
               <span>Últimos Partidos</span>
@@ -142,12 +142,12 @@ export async function HomeContent() {
                 recentMatches.map((match) => (
                   <div
                     key={match.id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-all hover-scale"
+                    className="border border-gray-700 rounded-lg p-4 hover:shadow-md transition-all hover-scale"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="font-semibold text-base">{match.homeTeam.name}</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                           {format(new Date(match.matchDate), "d MMM yyyy")}
                         </div>
                       </div>
@@ -161,7 +161,7 @@ export async function HomeContent() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+                <p className="text-gray-400 text-center py-8">
                   No hay partidos recientes
                 </p>
               )}
@@ -175,7 +175,7 @@ export async function HomeContent() {
           </div>
 
           {/* Top MVPs */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-slide-in-right hover-lift">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-slide-in-right hover-lift">
             <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
               <Star className="h-6 w-6 text-gold-kings" />
               <span>Top MVPs</span>
@@ -185,7 +185,7 @@ export async function HomeContent() {
                 topMVPs.map((stat, index) => (
                   <div
                     key={stat.id}
-                    className="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-all hover-scale"
+                    className="flex items-center justify-between border border-gray-700 rounded-lg p-4 hover:shadow-md transition-all hover-scale"
                   >
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gold-kings text-white font-bold">
@@ -193,7 +193,7 @@ export async function HomeContent() {
                       </div>
                       <div>
                         <div className="font-semibold text-base">{stat.player.name}</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                           {stat.player.team?.name || "Sin equipo"}
                         </div>
                       </div>
@@ -206,7 +206,7 @@ export async function HomeContent() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+                <p className="text-gray-400 text-center py-8">
                   No hay MVPs aún
                 </p>
               )}
@@ -215,7 +215,7 @@ export async function HomeContent() {
         </div>
 
         {/* Top Invested Players */}
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in hover-lift">
+        <div className="mt-8 bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in hover-lift">
           <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
             <TrendingUp className="h-6 w-6 text-blue-kings" />
             <span>Jugadores Estrella (Más Inversión)</span>
@@ -225,7 +225,7 @@ export async function HomeContent() {
               topInvested.map((item) => (
                 <div
                   key={item.player.id}
-                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-center hover:shadow-md transition-all hover-scale"
+                  className="border border-gray-700 rounded-lg p-4 text-center hover:shadow-md transition-all hover-scale"
                 >
                   {item.player.photo && (
                     <img
@@ -235,14 +235,14 @@ export async function HomeContent() {
                     />
                   )}
                   <div className="font-semibold text-base">{item.player.name}</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">{item.player.position}</div>
+                  <div className="text-sm text-gray-400">{item.player.position}</div>
                   <div className="text-lg font-bold text-gold-kings mt-2">
                     {item.total.toFixed(0)} €K
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-gray-600 dark:text-gray-400 text-center py-8 col-span-full">
+              <p className="text-gray-400 text-center py-8 col-span-full">
                 No hay jugadores con inversión aún
               </p>
             )}

@@ -133,17 +133,17 @@ export default function CreateAwardPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/admin/awards"
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>Volver a Premios</span>
           </Link>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8">
             <div className="flex items-center space-x-3 mb-6">
               <Trophy className="h-8 w-8 text-gold-kings" />
               <h1 className="text-3xl font-bold">Crear Premio de Temporada</h1>
@@ -151,7 +151,7 @@ export default function CreateAwardPage() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Temporada
                 </label>
                 <input
@@ -162,12 +162,12 @@ export default function CreateAwardPage() {
                   }
                   required
                   placeholder="Ej: 2024-2025"
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Categoría
                 </label>
                 <input
@@ -178,12 +178,12 @@ export default function CreateAwardPage() {
                   }
                   required
                   placeholder="Ej: best_player, best_team, top_scorer, etc."
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Tipo de Ganador (opcional)
                 </label>
                 <select
@@ -191,7 +191,7 @@ export default function CreateAwardPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, winnerType: e.target.value, winnerId: "" })
                   }
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-gray-700 text-white"
                 >
                   <option value="">Sin ganador (aún no asignado)</option>
                   <option value="player">Jugador</option>
@@ -202,7 +202,7 @@ export default function CreateAwardPage() {
 
               {formData.winnerType && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Ganador
                   </label>
                   <select
@@ -210,7 +210,7 @@ export default function CreateAwardPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, winnerId: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-gray-700 text-white"
                   >
                     <option value="">Seleccionar ganador</option>
                     {getWinnerOptions()}
@@ -219,7 +219,7 @@ export default function CreateAwardPage() {
               )}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Descripción (opcional)
                 </label>
                 <textarea
@@ -229,7 +229,7 @@ export default function CreateAwardPage() {
                   }
                   rows={4}
                   placeholder="Descripción adicional del premio..."
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-kings focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
 

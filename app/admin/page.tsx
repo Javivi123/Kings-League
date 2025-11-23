@@ -100,7 +100,7 @@ export default async function AdminPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Shield className="h-8 w-8 text-red-kings" />
@@ -114,7 +114,7 @@ export default async function AdminPage() {
                 <Link
                   key={section.href}
                   href={section.href}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow relative"
+                  className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow relative"
                 >
                   {section.badge && (
                     <span className="absolute top-4 right-4 w-3 h-3 bg-red-kings rounded-full"></span>
@@ -125,7 +125,7 @@ export default async function AdminPage() {
                     </div>
                     <div className="flex-1">
                       <h2 className="text-xl font-bold">{section.title}</h2>
-                      <div className="text-3xl font-bold text-gray-900 dark:text-white">
+                      <div className="text-3xl font-bold text-white">
                         {section.count}
                       </div>
                     </div>
@@ -141,7 +141,7 @@ export default async function AdminPage() {
           </div>
 
           {/* Quick Actions */}
-          <div className="mt-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+          <div className="mt-8 bg-gray-800 rounded-2xl shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-4 flex items-center space-x-2">
               <Settings className="h-6 w-6 text-blue-kings" />
               <span>Acciones Rápidas</span>

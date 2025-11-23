@@ -64,7 +64,7 @@ export default async function AuctionPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
@@ -82,7 +82,7 @@ export default async function AuctionPage() {
             {auctions.map((auction) => (
               <div
                 key={auction.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span
@@ -92,7 +92,7 @@ export default async function AuctionPage() {
                   >
                     {getStatusText(auction.status)}
                   </span>
-                  <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 text-sm">
+                  <div className="flex items-center space-x-1 text-gray-400 text-sm">
                     <Clock className="h-4 w-4" />
                     <span>
                       {format(new Date(auction.endDate), "d MMM yyyy", {
@@ -109,14 +109,14 @@ export default async function AuctionPage() {
                   >
                     {auction.player.name}
                   </Link>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-400">
                     {auction.player.position} - {auction.player.team?.name || "Sin equipo"}
                   </p>
                 </div>
 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-gray-400">
                       Precio Inicial:
                     </span>
                     <span className="font-bold text-gold-kings">
@@ -125,7 +125,7 @@ export default async function AuctionPage() {
                   </div>
                   {auction.currentBid && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-gray-400">
                         Puja Actual:
                       </span>
                       <span className="font-bold text-green-500">
@@ -135,7 +135,7 @@ export default async function AuctionPage() {
                   )}
                   {auction.team && (
                     <div className="flex justify-between">
-                      <span className="text-gray-600 dark:text-gray-400">
+                      <span className="text-gray-400">
                         Ofertado por:
                       </span>
                       <span className="font-semibold text-blue-kings">
@@ -146,8 +146,8 @@ export default async function AuctionPage() {
                 </div>
 
                 {auction.status === "active" && (
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="pt-4 border-t border-gray-700">
+                    <p className="text-sm text-gray-400">
                       {new Date(auction.endDate) > new Date()
                         ? `Termina: ${format(new Date(auction.endDate), "d MMM yyyy 'a las' HH:mm", {
                             locale: es,
@@ -161,9 +161,9 @@ export default async function AuctionPage() {
           </div>
 
           {auctions.length === 0 && (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Gavel className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay subastas registradas
               </p>
             </div>

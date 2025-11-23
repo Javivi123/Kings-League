@@ -28,7 +28,7 @@ export default async function AwardsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
@@ -54,19 +54,19 @@ export default async function AwardsPage() {
                   <Trophy className="h-8 w-8 text-gold-kings" />
                   <div>
                     <h3 className="font-bold text-lg">{award.category}</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-gray-400">
                       Temporada {award.season}
                     </p>
                   </div>
                 </div>
                 {award.description && (
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
+                  <p className="text-gray-300 mb-4">
                     {award.description}
                   </p>
                 )}
                 {award.winnerId && (
                   <div className="text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-gray-400">
                       Ganador:
                     </span>{" "}
                     <span className="font-semibold">{award.winnerId}</span>
@@ -80,9 +80,9 @@ export default async function AwardsPage() {
           </div>
 
           {awards.length === 0 && (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay premios registrados
               </p>
             </div>

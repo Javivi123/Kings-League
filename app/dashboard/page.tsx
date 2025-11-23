@@ -107,7 +107,7 @@ export default async function DashboardPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8 relative overflow-hidden">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8 relative overflow-hidden">
         <FloatingIcons type="mixed" count={8} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center space-x-3 mb-8 animate-fade-in">
@@ -124,7 +124,7 @@ export default async function DashboardPage() {
             )}
 
             {/* Noticias (para todos) */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-3">
                   <Newspaper className="h-6 w-6 text-blue-kings" />
@@ -141,7 +141,7 @@ export default async function DashboardPage() {
               {news.length === 0 ? (
                 <div className="text-center py-12">
                   <Newspaper className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 dark:text-gray-400 text-lg">
+                  <p className="text-gray-400 text-lg">
                     No hay noticias disponibles
                   </p>
                 </div>
@@ -150,7 +150,7 @@ export default async function DashboardPage() {
                   {news.map((item) => (
                     <article
                       key={item.id}
-                      className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0 last:pb-0"
+                      className="border-b border-gray-700 pb-6 last:border-0 last:pb-0"
                     >
                       {item.image && (
                         <img
@@ -159,7 +159,7 @@ export default async function DashboardPage() {
                           className="w-full h-48 object-cover rounded-lg mb-4"
                         />
                       )}
-                      <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <div className="flex items-center space-x-4 text-sm text-gray-400 mb-2">
                         <div className="flex items-center space-x-1">
                           <User className="h-4 w-4" />
                           <span>{item.author.name || "Admin"}</span>
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
                       </div>
                       <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                       <div
-                        className="text-gray-700 dark:text-gray-300 prose dark:prose-invert max-w-none line-clamp-3"
+                        className="text-gray-300 prose prose-invert max-w-none line-clamp-3"
                         dangerouslySetInnerHTML={{
                           __html: item.content.substring(0, 200) + "...",
                         }}

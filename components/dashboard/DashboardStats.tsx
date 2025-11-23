@@ -54,7 +54,7 @@ export function DashboardStats({ data }: DashboardStatsProps) {
 
         {/* Secondary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
             <div className="flex items-center space-x-3 mb-4">
               <Euro className="h-6 w-6 text-gold-kings" />
               <h3 className="font-bold text-lg">Euros Kings</h3>
@@ -64,7 +64,7 @@ export function DashboardStats({ data }: DashboardStatsProps) {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
             <div className="flex items-center space-x-3 mb-4">
               <Target className="h-6 w-6 text-green-500" />
               <h3 className="font-bold text-lg">Asistencias</h3>
@@ -74,7 +74,7 @@ export function DashboardStats({ data }: DashboardStatsProps) {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-fade-in">
             <div className="flex items-center space-x-3 mb-4">
               <Trophy className="h-6 w-6 text-blue-kings" />
               <h3 className="font-bold text-lg">Partidos</h3>
@@ -82,7 +82,7 @@ export function DashboardStats({ data }: DashboardStatsProps) {
             <div className="text-3xl font-bold text-blue-kings">
               {teamData.matches}
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <div className="text-sm text-gray-400 mt-2">
               {teamData.wins}W - {teamData.draws}E - {teamData.losses}L
             </div>
           </div>

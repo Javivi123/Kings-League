@@ -136,15 +136,15 @@ export default async function MatchDetailPage({
   const getEventColor = (type: string) => {
     switch (type) {
       case "goal":
-        return "text-green-600 dark:text-green-400";
+        return "text-green-400";
       case "yellow_card":
-        return "text-yellow-600 dark:text-yellow-400";
+        return "text-yellow-400";
       case "red_card":
-        return "text-red-600 dark:text-red-400";
+        return "text-red-400";
       case "substitution":
-        return "text-blue-600 dark:text-blue-400";
+        return "text-blue-400";
       default:
-        return "text-gray-600 dark:text-gray-400";
+        return "text-gray-400";
     }
   };
 
@@ -155,14 +155,14 @@ export default async function MatchDetailPage({
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6">
+      <main className="min-h-screen bg-gray-900 py-6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Principal - Estilo Google */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+          <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 mb-6">
             <div className="p-6">
               {/* Fecha y Estado */}
               <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex items-center space-x-4 text-sm text-gray-400">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
                     <span>
@@ -255,7 +255,7 @@ export default async function MatchDetailPage({
             <div className="lg:col-span-2 space-y-6">
               {/* Timeline de Eventos - Estilo Google */}
               {allEvents.length > 0 && (
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
                   <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                     <Clock className="h-5 w-5" />
                     <span>Resumen del Partido</span>
@@ -268,12 +268,12 @@ export default async function MatchDetailPage({
                           key={event.id}
                           className={`flex items-center space-x-3 p-3 rounded-lg ${
                             isHome
-                              ? "bg-blue-50 dark:bg-blue-900/20"
-                              : "bg-red-50 dark:bg-red-900/20"
+                              ? "bg-blue-900/20"
+                              : "bg-red-900/20"
                           }`}
                         >
                           <div className="flex-shrink-0 w-12 text-center">
-                            <span className="text-sm font-bold text-gray-600 dark:text-gray-400">
+                            <span className="text-sm font-bold text-gray-400">
                               {event.minute}'
                             </span>
                           </div>
@@ -290,7 +290,7 @@ export default async function MatchDetailPage({
                                   {event.player?.name || "Jugador desconocido"}
                                 </Link>
                                 {event.description && (
-                                  <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">
+                                  <span className="text-sm text-gray-400 ml-2">
                                     ({event.description})
                                   </span>
                                 )}
@@ -337,7 +337,7 @@ export default async function MatchDetailPage({
                               </div>
                             )}
                           </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-gray-400">
                             {event.team.name}
                           </div>
                         </div>
@@ -348,7 +348,7 @@ export default async function MatchDetailPage({
               )}
 
               {/* Alineaciones - Estilo Google */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+              <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
                 <h2 className="text-xl font-bold mb-6 flex items-center space-x-2">
                   <Users className="h-5 w-5" />
                   <span>Alineaciones</span>
@@ -356,22 +356,22 @@ export default async function MatchDetailPage({
                 <div className="grid grid-cols-2 gap-6">
                   {/* Equipo Local */}
                   <div>
-                    <h3 className="font-bold text-lg mb-4 text-blue-600 dark:text-blue-400">
+                    <h3 className="font-bold text-lg mb-4 text-blue-400">
                       {match.homeTeam.name}
                     </h3>
                     <div className="space-y-2 mb-4">
-                      <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
+                      <div className="text-xs font-semibold text-gray-400 mb-2">
                         TITULARES
                       </div>
                       {homeStarters.length > 0 ? (
                         homeStarters.map((lineup) => (
                           <div
                             key={lineup.id}
-                            className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-900 rounded"
+                            className="flex items-center justify-between py-2 px-3 bg-gray-900 rounded"
                           >
                             <div className="flex items-center space-x-3">
                               {lineup.shirtNumber && (
-                                <span className="font-bold text-gray-600 dark:text-gray-400 w-6 text-center">
+                                <span className="font-bold text-gray-400 w-6 text-center">
                                   {lineup.shirtNumber}
                                 </span>
                               )}
@@ -382,20 +382,20 @@ export default async function MatchDetailPage({
                                 {lineup.player.name}
                               </Link>
                             </div>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                            <span className="text-xs text-gray-400">
                               {lineup.position}
                             </span>
                           </div>
                         ))
                       ) : (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                        <p className="text-sm text-gray-400 italic">
                           No hay alineación disponible
                         </p>
                       )}
                     </div>
                     {homeBench.length > 0 && (
                       <div className="mt-4">
-                        <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
+                        <div className="text-xs font-semibold text-gray-400 mb-2">
                           BANQUILLO
                         </div>
                         <div className="space-y-1">
@@ -405,13 +405,13 @@ export default async function MatchDetailPage({
                               className="flex items-center space-x-2 text-sm py-1"
                             >
                               {lineup.shirtNumber && (
-                                <span className="font-bold text-gray-500 dark:text-gray-400 w-6 text-center">
+                                <span className="font-bold text-gray-400 w-6 text-center">
                                   {lineup.shirtNumber}
                                 </span>
                               )}
                               <Link
                                 href={`/players/${lineup.playerId}`}
-                                className="hover:underline text-gray-700 dark:text-gray-300"
+                                className="hover:underline text-gray-300"
                               >
                                 {lineup.player.name}
                               </Link>
@@ -424,22 +424,22 @@ export default async function MatchDetailPage({
 
                   {/* Equipo Visitante */}
                   <div>
-                    <h3 className="font-bold text-lg mb-4 text-red-600 dark:text-red-400">
+                    <h3 className="font-bold text-lg mb-4 text-red-400">
                       {match.awayTeam.name}
                     </h3>
                     <div className="space-y-2 mb-4">
-                      <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
+                      <div className="text-xs font-semibold text-gray-400 mb-2">
                         TITULARES
                       </div>
                       {awayStarters.length > 0 ? (
                         awayStarters.map((lineup) => (
                           <div
                             key={lineup.id}
-                            className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-900 rounded"
+                            className="flex items-center justify-between py-2 px-3 bg-gray-900 rounded"
                           >
                             <div className="flex items-center space-x-3">
                               {lineup.shirtNumber && (
-                                <span className="font-bold text-gray-600 dark:text-gray-400 w-6 text-center">
+                                <span className="font-bold text-gray-400 w-6 text-center">
                                   {lineup.shirtNumber}
                                 </span>
                               )}
@@ -450,20 +450,20 @@ export default async function MatchDetailPage({
                                 {lineup.player.name}
                               </Link>
                             </div>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                            <span className="text-xs text-gray-400">
                               {lineup.position}
                             </span>
                           </div>
                         ))
                       ) : (
-                        <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                        <p className="text-sm text-gray-400 italic">
                           No hay alineación disponible
                         </p>
                       )}
                     </div>
                     {awayBench.length > 0 && (
                       <div className="mt-4">
-                        <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2">
+                        <div className="text-xs font-semibold text-gray-400 mb-2">
                           BANQUILLO
                         </div>
                         <div className="space-y-1">
@@ -473,13 +473,13 @@ export default async function MatchDetailPage({
                               className="flex items-center space-x-2 text-sm py-1"
                             >
                               {lineup.shirtNumber && (
-                                <span className="font-bold text-gray-500 dark:text-gray-400 w-6 text-center">
+                                <span className="font-bold text-gray-400 w-6 text-center">
                                   {lineup.shirtNumber}
                                 </span>
                               )}
                               <Link
                                 href={`/players/${lineup.playerId}`}
-                                className="hover:underline text-gray-700 dark:text-gray-300"
+                                className="hover:underline text-gray-300"
                               >
                                 {lineup.player.name}
                               </Link>
@@ -496,7 +496,7 @@ export default async function MatchDetailPage({
             {/* Columna Lateral - Estadísticas */}
             {match.stats && (
               <div className="space-y-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+                <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
                   <h2 className="text-xl font-bold mb-6 flex items-center space-x-2">
                     <TrendingUp className="h-5 w-5" />
                     <span>Estadísticas</span>
@@ -506,10 +506,10 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm mb-2">
                         <span className="font-semibold">{match.stats.homePossession}%</span>
-                        <span className="text-gray-600 dark:text-gray-400">Posesión</span>
+                        <span className="text-gray-400">Posesión</span>
                         <span className="font-semibold">{match.stats.awayPossession}%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                      <div className="w-full bg-gray-700 rounded-full h-3">
                         <div
                           className="bg-blue-500 h-3 rounded-full transition-all"
                           style={{ width: `${match.stats.homePossession}%` }}
@@ -521,10 +521,10 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm mb-2">
                         <span className="font-semibold">{match.stats.homeShots}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Tiros</span>
+                        <span className="text-gray-400">Tiros</span>
                         <span className="font-semibold">{match.stats.awayShots}</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-700 rounded-full h-2">
                         <div
                           className="bg-blue-500 h-2 rounded-full"
                           style={{
@@ -542,10 +542,10 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm mb-2">
                         <span className="font-semibold">{match.stats.homeShotsOnTarget}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Tiros a puerta</span>
+                        <span className="text-gray-400">Tiros a puerta</span>
                         <span className="font-semibold">{match.stats.awayShotsOnTarget}</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-700 rounded-full h-2">
                         <div
                           className="bg-blue-500 h-2 rounded-full"
                           style={{
@@ -560,10 +560,10 @@ export default async function MatchDetailPage({
                     </div>
 
                     {/* Pases */}
-                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                    <div className="pt-2 border-t border-gray-700">
                       <div className="flex justify-between text-sm">
                         <span className="font-semibold">{match.stats.homePasses}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Pases</span>
+                        <span className="text-gray-400">Pases</span>
                         <span className="font-semibold">{match.stats.awayPasses}</span>
                       </div>
                     </div>
@@ -574,7 +574,7 @@ export default async function MatchDetailPage({
                         <span className="font-semibold">
                           {match.stats.homePassAccuracy?.toFixed(0)}%
                         </span>
-                        <span className="text-gray-600 dark:text-gray-400">Precisión de pases</span>
+                        <span className="text-gray-400">Precisión de pases</span>
                         <span className="font-semibold">
                           {match.stats.awayPassAccuracy?.toFixed(0)}%
                         </span>
@@ -585,7 +585,7 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm">
                         <span className="font-semibold">{match.stats.homeFouls}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Faltas</span>
+                        <span className="text-gray-400">Faltas</span>
                         <span className="font-semibold">{match.stats.awayFouls}</span>
                       </div>
                     </div>
@@ -594,7 +594,7 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm">
                         <span className="font-semibold">{match.stats.homeCorners}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Saques de esquina</span>
+                        <span className="text-gray-400">Saques de esquina</span>
                         <span className="font-semibold">{match.stats.awayCorners}</span>
                       </div>
                     </div>
@@ -603,7 +603,7 @@ export default async function MatchDetailPage({
                     <div>
                       <div className="flex justify-between text-sm">
                         <span className="font-semibold">{match.stats.homeOffsides}</span>
-                        <span className="text-gray-600 dark:text-gray-400">Fueras de juego</span>
+                        <span className="text-gray-400">Fueras de juego</span>
                         <span className="font-semibold">{match.stats.awayOffsides}</span>
                       </div>
                     </div>

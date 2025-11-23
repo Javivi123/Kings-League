@@ -80,17 +80,17 @@ export function NotificationBell() {
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700 max-h-96 overflow-y-auto animate-fade-in">
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="absolute right-0 mt-2 w-80 bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-700 max-h-96 overflow-y-auto animate-fade-in">
+            <div className="p-4 border-b border-gray-700">
               <h3 className="font-bold text-lg">Notificaciones</h3>
             </div>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="divide-y divide-gray-700">
               {notifications.length > 0 ? (
                 notifications.slice(0, 10).map((notification) => (
                   <div
                     key={notification.id}
-                    className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
-                      !notification.read ? "bg-blue-50 dark:bg-blue-900/20" : ""
+                    className={`p-4 hover:bg-gray-700 cursor-pointer ${
+                      !notification.read ? "bg-blue-900/20" : ""
                     }`}
                     onClick={() => {
                       markAsRead(notification.id);
@@ -111,7 +111,7 @@ export function NotificationBell() {
                       />
                       <div className="flex-1">
                         <p className="font-semibold text-sm">{notification.title}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                        <p className="text-sm text-gray-400 mt-1">
                           {notification.message}
                         </p>
                         <p className="text-xs text-gray-500 mt-2">
@@ -128,7 +128,7 @@ export function NotificationBell() {
               )}
             </div>
             {notifications.length > 0 && (
-              <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="p-4 border-t border-gray-700">
                 <Link
                   href="/notifications"
                   className="text-sm text-blue-kings hover:text-blue-dark font-medium"

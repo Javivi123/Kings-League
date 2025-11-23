@@ -26,7 +26,7 @@ export default async function TeamsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Users className="h-8 w-8 text-blue-kings" />
@@ -38,7 +38,7 @@ export default async function TeamsPage() {
               <Link
                 key={team.id}
                 href={`/teams/${team.id}`}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center space-x-4 mb-4">
                   {team.logo ? (
@@ -54,7 +54,7 @@ export default async function TeamsPage() {
                   )}
                   <div className="flex-1">
                     <h2 className="text-2xl font-bold">{team.name}</h2>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-400">
                       {team.owner.name}
                     </p>
                   </div>
@@ -62,7 +62,7 @@ export default async function TeamsPage() {
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Puntos
                     </div>
                     <div className="text-2xl font-bold text-gold-kings">
@@ -70,7 +70,7 @@ export default async function TeamsPage() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Jugadores
                     </div>
                     <div className="text-2xl font-bold">{team.players.length}</div>
@@ -78,7 +78,7 @@ export default async function TeamsPage() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-gray-400">
                     {team.wins}W - {team.draws}E - {team.losses}L
                   </span>
                   <span className="text-gold-kings font-semibold">
@@ -92,7 +92,7 @@ export default async function TeamsPage() {
           {teams.length === 0 && (
             <div className="text-center py-12">
               <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay equipos registrados aún
               </p>
             </div>

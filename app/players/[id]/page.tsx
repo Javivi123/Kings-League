@@ -67,10 +67,10 @@ export default async function PlayerPage({
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-6">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8 mb-6">
             <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
               {player.photo ? (
                 <img
@@ -94,7 +94,7 @@ export default async function PlayerPage({
                     {player.position}
                   </span>
                   {player.age && (
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-gray-400">
                       {player.age} años
                     </span>
                   )}
@@ -110,7 +110,7 @@ export default async function PlayerPage({
                 )}
               </div>
               <div className="text-center">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="text-sm text-gray-400 mb-1">
                   Valor de Mercado
                 </div>
                 <div className="text-3xl font-bold text-gold-kings">
@@ -123,7 +123,7 @@ export default async function PlayerPage({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Estadísticas */}
             {player.stats && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
                   <Trophy className="h-6 w-6 text-gold-kings" />
                   <span>Estadísticas</span>
@@ -133,7 +133,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-blue-kings">
                       {player.stats.goals}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Goles
                     </div>
                   </div>
@@ -141,7 +141,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-green-500">
                       {player.stats.assists}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Asistencias
                     </div>
                   </div>
@@ -149,7 +149,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-yellow-500">
                       {player.stats.matches}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Partidos
                     </div>
                   </div>
@@ -157,7 +157,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-gold-kings">
                       {player.stats.mvpCount}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       MVPs
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-red-kings">
                       {player.stats.points}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Puntos Fantasy
                     </div>
                   </div>
@@ -173,7 +173,7 @@ export default async function PlayerPage({
                     <div className="text-3xl font-bold text-orange-500">
                       {player.stats.yellowCards + player.stats.redCards}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Tarjetas
                     </div>
                   </div>
@@ -182,13 +182,13 @@ export default async function PlayerPage({
             )}
 
             {/* Inversiones */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
               <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
                 <TrendingUp className="h-6 w-6 text-blue-kings" />
                 <span>Inversiones</span>
               </h2>
               <div className="mb-4">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="text-sm text-gray-400 mb-1">
                   Total Invertido
                 </div>
                 <div className="text-3xl font-bold text-gold-kings">
@@ -197,13 +197,13 @@ export default async function PlayerPage({
               </div>
               {player.investments.length > 0 && (
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <div className="text-sm font-semibold text-gray-300 mb-2">
                     Inversiones por equipo:
                   </div>
                   {player.investments.slice(0, 5).map((inv) => (
                     <div
                       key={inv.id}
-                      className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-700 rounded-lg"
+                      className="flex items-center justify-between p-3 bg-gray-700 rounded-lg"
                     >
                       <span className="font-medium">{inv.team.name}</span>
                       <span className="text-gold-kings font-bold">
@@ -217,19 +217,19 @@ export default async function PlayerPage({
           </div>
 
           {/* Estado */}
-          <div className="mt-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+          <div className="mt-6 bg-gray-800 rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="text-sm text-gray-400 mb-1">
                   Estado
                 </div>
                 <div className="flex items-center space-x-2">
                   {player.team ? (
-                    <span className="px-4 py-2 bg-green-500/20 text-green-600 dark:text-green-400 rounded-full font-semibold">
+                    <span className="px-4 py-2 bg-green-500/20 text-green-400 rounded-full font-semibold">
                       Contratado
                     </span>
                   ) : (
-                    <span className="px-4 py-2 bg-gray-500/20 text-gray-600 dark:text-gray-400 rounded-full font-semibold">
+                    <span className="px-4 py-2 bg-gray-500/20 text-gray-400 rounded-full font-semibold">
                       Disponible
                     </span>
                   )}
@@ -241,7 +241,7 @@ export default async function PlayerPage({
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <div className="text-sm text-gray-400 mb-1">
                   Precio Actual
                 </div>
                 <div className="text-2xl font-bold text-gold-kings">

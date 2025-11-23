@@ -43,7 +43,7 @@ export default async function AchievementsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Trophy className="h-8 w-8 text-gold-kings" />
@@ -52,27 +52,27 @@ export default async function AchievementsPage() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
               <div className="text-4xl font-bold text-gold-kings mb-2">
                 {userAchievements.length}
               </div>
-              <div className="text-gray-600 dark:text-gray-400">
+              <div className="text-gray-400">
                 Logros Desbloqueados
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
               <div className="text-4xl font-bold text-blue-kings mb-2">
                 {allAchievements.length}
               </div>
-              <div className="text-gray-600 dark:text-gray-400">
+              <div className="text-gray-400">
                 Logros Totales
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 text-center animate-scale-in">
               <div className="text-4xl font-bold text-green-500 mb-2">
                 {Math.round((userAchievements.length / allAchievements.length) * 100) || 0}%
               </div>
-              <div className="text-gray-600 dark:text-gray-400">
+              <div className="text-gray-400">
                 Progreso
               </div>
             </div>
@@ -89,10 +89,10 @@ export default async function AchievementsPage() {
               return (
                 <div
                   key={achievement.id}
-                  className={`bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 border-2 transition-all duration-200 animate-fade-in ${
+                  className={`bg-gray-800 rounded-2xl shadow-lg p-6 border-2 transition-all duration-200 animate-fade-in ${
                     isUnlocked
                       ? "border-gold-kings bg-gradient-to-br from-gold-kings/10 to-gold-kings/5"
-                      : "border-gray-200 dark:border-gray-700 opacity-60"
+                      : "border-gray-700 opacity-60"
                   }`}
                 >
                   <div className="flex items-start space-x-4">
@@ -110,7 +110,7 @@ export default async function AchievementsPage() {
                           <Award className="h-5 w-5 text-gold-kings" />
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                      <p className="text-sm text-gray-400 mb-3">
                         {achievement.description}
                       </p>
                       <div className="text-xs text-gray-500">
@@ -130,9 +130,9 @@ export default async function AchievementsPage() {
           </div>
 
           {allAchievements.length === 0 && (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay logros disponibles aún
               </p>
             </div>

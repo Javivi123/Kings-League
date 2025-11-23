@@ -35,7 +35,7 @@ export default async function AdminTeamsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-3">
@@ -56,7 +56,7 @@ export default async function AdminTeamsPage() {
               <Link
                 key={team.id}
                 href={`/teams/${team.id}`}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center space-x-4 mb-4">
                   {team.logo ? (
@@ -72,7 +72,7 @@ export default async function AdminTeamsPage() {
                   )}
                   <div className="flex-1">
                     <h2 className="text-2xl font-bold">{team.name}</h2>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-400">
                       {team.owner.name || team.owner.email}
                     </p>
                   </div>
@@ -80,27 +80,27 @@ export default async function AdminTeamsPage() {
 
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Puntos</div>
+                    <div className="text-sm text-gray-400">Puntos</div>
                     <div className="text-2xl font-bold text-gold-kings">{team.points}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Jugadores</div>
+                    <div className="text-sm text-gray-400">Jugadores</div>
                     <div className="text-2xl font-bold">{team.players.length}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Victorias</div>
+                    <div className="text-sm text-gray-400">Victorias</div>
                     <div className="text-xl font-bold text-green-500">{team.wins}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Euros Kings</div>
+                    <div className="text-sm text-gray-400">Euros Kings</div>
                     <div className="text-xl font-bold text-gold-kings">
                       {team.eurosKings.toFixed(0)} €K
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="mt-4 pt-4 border-t border-gray-700">
+                  <div className="text-sm text-gray-400">
                     {team.wins}W - {team.draws}E - {team.losses}L
                   </div>
                 </div>
@@ -109,9 +109,9 @@ export default async function AdminTeamsPage() {
           </div>
 
           {teams.length === 0 && (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
               <Trophy className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay equipos registrados
               </p>
             </div>

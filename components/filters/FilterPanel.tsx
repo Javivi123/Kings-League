@@ -45,7 +45,7 @@ export function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+        className="flex items-center space-x-2 px-4 py-2 border border-gray-600 rounded-lg hover:bg-gray-700 transition-colors"
       >
         <Filter className="h-5 w-5" />
         <span>Filtros</span>
@@ -62,7 +62,7 @@ export function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700 p-4 animate-fade-in">
+          <div className="absolute right-0 mt-2 w-80 bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-700 p-4 animate-fade-in">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-lg">Filtros</h3>
               <button
@@ -76,13 +76,13 @@ export function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
             <div className="space-y-4 max-h-96 overflow-y-auto">
               {Object.entries(filters).map(([key, filter]) => (
                 <div key={key}>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     {filter.label}
                   </label>
                   <select
                     value={activeFilters[key] || ""}
                     onChange={(e) => handleFilterChange(key, e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-gray-700 text-white"
                   >
                     <option value="">Todos</option>
                     {filter.options.map((option) => (
@@ -96,7 +96,7 @@ export function FilterPanel({ filters, onFilterChange }: FilterPanelProps) {
             </div>
 
             {activeCount > 0 && (
-              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="mt-4 pt-4 border-t border-gray-700">
                 <Button
                   variant="outline"
                   size="sm"

@@ -108,7 +108,7 @@ export default function PlayersPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8 relative overflow-hidden">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8 relative overflow-hidden">
         <FloatingIcons type="stars" count={8} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between mb-8">
@@ -163,7 +163,7 @@ export default function PlayersPage() {
             <div className="text-center py-12">Cargando...</div>
           ) : (
             <>
-              <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+              <div className="mb-4 text-sm text-gray-400">
                 Mostrando {filteredPlayers.length} de {players.length} jugadores
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -171,7 +171,7 @@ export default function PlayersPage() {
                   <Link
                     key={player.id}
                     href={`/players/${player.id}`}
-                    className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-200 hover:scale-105 animate-fade-in"
+                    className="bg-gray-800 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-all duration-200 hover:scale-105 animate-fade-in"
                   >
                     <div className="text-center mb-4">
                       <div className="w-24 h-24 rounded-full bg-blue-kings mx-auto mb-3 flex items-center justify-center text-white text-3xl font-bold">
@@ -191,7 +191,7 @@ export default function PlayersPage() {
 
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">
+                        <span className="text-gray-400">
                           Equipo:
                         </span>
                         <span className="font-semibold">
@@ -199,7 +199,7 @@ export default function PlayersPage() {
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">
+                        <span className="text-gray-400">
                           Valor:
                         </span>
                         <span className="font-bold text-gold-kings">
@@ -209,7 +209,7 @@ export default function PlayersPage() {
                       {player.stats && (
                         <>
                           <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">
+                            <span className="text-gray-400">
                               Goles:
                             </span>
                             <span className="font-semibold">
@@ -217,7 +217,7 @@ export default function PlayersPage() {
                             </span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600 dark:text-gray-400">
+                            <span className="text-gray-400">
                               Asistencias:
                             </span>
                             <span className="font-semibold">
@@ -232,9 +232,9 @@ export default function PlayersPage() {
               </div>
 
               {filteredPlayers.length === 0 && (
-                <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+                <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
                   <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 dark:text-gray-400 text-lg">
+                  <p className="text-gray-400 text-lg">
                     No se encontraron jugadores
                   </p>
                 </div>

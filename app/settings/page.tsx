@@ -87,7 +87,7 @@ export default function SettingsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Settings className="h-8 w-8 text-blue-kings" />
@@ -96,7 +96,7 @@ export default function SettingsPage() {
 
           <div className="space-y-6">
             {/* Profile Settings */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <User className="h-6 w-6 text-blue-kings" />
                 <h2 className="text-2xl font-bold">Perfil</h2>
@@ -104,7 +104,7 @@ export default function SettingsPage() {
 
               <form onSubmit={handleUpdateProfile} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Nombre
                   </label>
                   <input
@@ -113,19 +113,19 @@ export default function SettingsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     disabled
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 text-gray-400 cursor-not-allowed"
                   />
                   <p className="text-sm text-gray-500 mt-1">
                     El email no se puede cambiar
@@ -133,7 +133,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Edad
                   </label>
                   <input
@@ -144,7 +144,7 @@ export default function SettingsPage() {
                     }
                     min="1"
                     max="100"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
 
@@ -181,7 +181,7 @@ export default function SettingsPage() {
             )}
 
             {/* Security */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <Lock className="h-6 w-6 text-red-kings" />
                 <h2 className="text-2xl font-bold">Seguridad</h2>

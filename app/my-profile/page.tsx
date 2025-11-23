@@ -87,9 +87,9 @@ export default async function MyProfilePage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+        <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-lg text-gray-600 dark:text-gray-400">
+            <p className="text-lg text-gray-400">
               No se encontró tu perfil de jugador. Contacta con un administrador.
             </p>
           </div>
@@ -102,7 +102,7 @@ export default async function MyProfilePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-kings to-blue-dark rounded-2xl shadow-lg p-8 mb-6 text-white">
@@ -147,7 +147,7 @@ export default async function MyProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {/* Estadísticas Personales */}
             {playerProfile.stats && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
                   <Trophy className="h-6 w-6 text-gold-kings" />
                   <span>Mis Estadísticas</span>
@@ -157,7 +157,7 @@ export default async function MyProfilePage() {
                     <div className="text-3xl font-bold text-blue-kings">
                       {playerProfile.stats.goals}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Goles
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default async function MyProfilePage() {
                     <div className="text-3xl font-bold text-green-500">
                       {playerProfile.stats.assists}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Asistencias
                     </div>
                   </div>
@@ -173,7 +173,7 @@ export default async function MyProfilePage() {
                     <div className="text-3xl font-bold text-yellow-500">
                       {playerProfile.stats.matches}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Partidos
                     </div>
                   </div>
@@ -181,7 +181,7 @@ export default async function MyProfilePage() {
                     <div className="text-3xl font-bold text-gold-kings">
                       {playerProfile.stats.mvpCount}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       MVPs
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export default async function MyProfilePage() {
                     <div className="text-3xl font-bold text-red-kings">
                       {playerProfile.stats.points}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Puntos Fantasy
                     </div>
                   </div>
@@ -199,34 +199,34 @@ export default async function MyProfilePage() {
 
             {/* Panel del Equipo */}
             {playerProfile.team && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
                   <Users className="h-6 w-6 text-blue-kings" />
                   <span>Mi Equipo</span>
                 </h2>
                 <div className="space-y-4">
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="text-sm text-gray-400 mb-1">
                       Equipo
                     </div>
                     <div className="text-xl font-bold">{playerProfile.team.name}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       Presidente: {playerProfile.team.owner.name}
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="text-sm text-gray-400 mb-1">
                       Mi Posición en el Equipo
                     </div>
                     <div className="text-3xl font-bold text-gold-kings">
                       #{playerProfile.playerPosition}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       de {playerProfile.team.players.length} jugadores
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="text-sm text-gray-400 mb-1">
                       Dinero Invertido en Mí
                     </div>
                     <div className="text-2xl font-bold text-gold-kings">
@@ -240,7 +240,7 @@ export default async function MyProfilePage() {
 
           {/* Próximos Partidos */}
           {playerProfile.upcomingMatches.length > 0 && (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 mb-6">
               <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
                 <Calendar className="h-6 w-6 text-blue-kings" />
                 <span>Próximos Partidos</span>
@@ -252,14 +252,14 @@ export default async function MyProfilePage() {
                   return (
                     <div
                       key={match.id}
-                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4"
+                      className="border border-gray-700 rounded-lg p-4"
                     >
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="font-semibold text-lg">
                             {isHome ? "vs" : "@"} {opponent.name}
                           </div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                          <div className="text-sm text-gray-400">
                             {new Date(match.matchDate).toLocaleDateString("es-ES", {
                               weekday: "long",
                               year: "numeric",
@@ -271,7 +271,7 @@ export default async function MyProfilePage() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                          <div className="text-sm text-gray-400">
                             {isHome ? "Local" : "Visitante"}
                           </div>
                         </div>

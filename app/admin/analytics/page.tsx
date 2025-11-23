@@ -58,7 +58,7 @@ export default async function AnalyticsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <BarChart3 className="h-8 w-8 text-blue-kings" />
@@ -67,13 +67,13 @@ export default async function AnalyticsPage() {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
               <div className="flex items-center justify-between mb-4">
                 <Users className="h-8 w-8 text-blue-kings" />
                 <TrendingUp className="h-5 w-5 text-green-500" />
               </div>
               <div className="text-3xl font-bold mb-1">{analytics.totalUsers}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm text-gray-400">
                 Usuarios Totales
               </div>
               <div className="text-xs text-gray-500 mt-2">
@@ -81,18 +81,18 @@ export default async function AnalyticsPage() {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
               <div className="flex items-center justify-between mb-4">
                 <Trophy className="h-8 w-8 text-gold-kings" />
                 <TrendingUp className="h-5 w-5 text-green-500" />
               </div>
               <div className="text-3xl font-bold mb-1">{analytics.totalTeams}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm text-gray-400">
                 Equipos
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
               <div className="flex items-center justify-between mb-4">
                 <Users className="h-8 w-8 text-green-500" />
                 <TrendingUp className="h-5 w-5 text-green-500" />
@@ -100,12 +100,12 @@ export default async function AnalyticsPage() {
               <div className="text-3xl font-bold mb-1">
                 {analytics.totalPlayers}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm text-gray-400">
                 Jugadores
               </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
+            <div className="bg-gray-800 rounded-2xl shadow-lg p-6 animate-scale-in">
               <div className="flex items-center justify-between mb-4">
                 <Activity className="h-8 w-8 text-red-kings" />
                 <TrendingUp className="h-5 w-5 text-green-500" />
@@ -113,14 +113,14 @@ export default async function AnalyticsPage() {
               <div className="text-3xl font-bold mb-1">
                 {analytics.totalMatches}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="text-sm text-gray-400">
                 Partidos
               </div>
             </div>
           </div>
 
           {/* Recent Activity */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-6 flex items-center space-x-2">
               <Activity className="h-6 w-6 text-blue-kings" />
               <span>Actividad Reciente</span>
@@ -129,13 +129,13 @@ export default async function AnalyticsPage() {
               {analytics.recentActivity.map((match) => (
                 <div
                   key={match.id}
-                  className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg animate-fade-in"
+                  className="flex items-center justify-between p-4 border border-gray-700 rounded-lg animate-fade-in"
                 >
                   <div>
                     <div className="font-semibold">
                       {match.homeTeam.name} vs {match.awayTeam.name}
                     </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">
+                    <div className="text-sm text-gray-400">
                       {new Date(match.createdAt).toLocaleDateString()}
                     </div>
                   </div>

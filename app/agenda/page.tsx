@@ -73,7 +73,7 @@ export default async function AgendaPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <Calendar className="h-8 w-8 text-blue-kings" />
@@ -84,7 +84,7 @@ export default async function AgendaPage() {
             {allItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
+                className="bg-gray-800 rounded-2xl shadow-lg p-6"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
@@ -102,7 +102,7 @@ export default async function AgendaPage() {
                         ? `${item.homeTeam.name} vs ${item.awayTeam.name}`
                         : item.title}
                     </h2>
-                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center space-x-4 text-sm text-gray-400">
                       <div className="flex items-center space-x-1">
                         <Calendar className="h-4 w-4" />
                         <span>
@@ -141,7 +141,7 @@ export default async function AgendaPage() {
                       </div>
                     )}
                     {item.description && (
-                      <p className="mt-2 text-gray-700 dark:text-gray-300">
+                      <p className="mt-2 text-gray-300">
                         {item.description}
                       </p>
                     )}
@@ -151,9 +151,9 @@ export default async function AgendaPage() {
             ))}
 
             {allItems.length === 0 && (
-              <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+              <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg">
                 <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-gray-400 text-lg">
+                <p className="text-gray-400 text-lg">
                   No hay eventos programados
                 </p>
               </div>

@@ -71,7 +71,7 @@ export default async function AdminRequestsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-3 mb-8">
             <FileText className="h-8 w-8 text-blue-kings" />
@@ -83,7 +83,7 @@ export default async function AdminRequestsPage() {
             )}
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+          <div className="bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-black-kings text-white">
@@ -140,7 +140,7 @@ export default async function AdminRequestsPage() {
                           {getStatusText(request.status)}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
+                      <td className="px-6 py-4 text-sm text-gray-400">
                         {format(new Date(request.createdAt), "d MMM yyyy", { locale: es })}
                       </td>
                       <td className="px-6 py-4 text-center">
@@ -154,9 +154,9 @@ export default async function AdminRequestsPage() {
           </div>
 
           {requests.length === 0 && (
-            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl shadow-lg mt-6">
+            <div className="text-center py-12 bg-gray-800 rounded-2xl shadow-lg mt-6">
               <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-400 text-lg">
                 No hay solicitudes registradas
               </p>
             </div>

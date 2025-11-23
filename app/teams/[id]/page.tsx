@@ -77,10 +77,10 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header del Equipo */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8 mb-8">
             <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-8">
               {team.logo ? (
                 <img
@@ -95,7 +95,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
               )}
               <div className="flex-1 text-center md:text-left">
                 <h1 className="text-5xl font-bold mb-2">{team.name}</h1>
-                <p className="text-xl text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-xl text-gray-400 mb-4">
                   Presidente: {team.owner.name || team.owner.email}
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
@@ -128,13 +128,13 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
             {/* Estadísticas del Equipo */}
             <div className="lg:col-span-2 space-y-6">
               {/* Jugadores */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <div className="flex items-center space-x-3 mb-6">
                   <Users className="h-6 w-6 text-blue-kings" />
                   <h2 className="text-2xl font-bold">Jugadores ({team.players.length})</h2>
                 </div>
                 {team.players.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+                  <p className="text-gray-400 text-center py-8">
                     No hay jugadores en este equipo
                   </p>
                 ) : (
@@ -143,7 +143,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
                       <Link
                         key={player.id}
                         href={`/players/${player.id}`}
-                        className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className="bg-gray-900 rounded-lg p-4 hover:bg-gray-800 transition-colors"
                       >
                         <div className="flex items-center space-x-4">
                           {player.photo ? (
@@ -159,7 +159,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
                           )}
                           <div className="flex-1">
                             <h3 className="font-bold text-lg">{player.name}</h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-sm text-gray-400">
                               {player.position}
                             </p>
                             {player.stats && (
@@ -181,13 +181,13 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
               </div>
 
               {/* Partidos Recientes */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <div className="flex items-center space-x-3 mb-6">
                   <Calendar className="h-6 w-6 text-blue-kings" />
                   <h2 className="text-2xl font-bold">Partidos Recientes</h2>
                 </div>
                 {allMatches.length === 0 ? (
-                  <p className="text-gray-600 dark:text-gray-400 text-center py-8">
+                  <p className="text-gray-400 text-center py-8">
                     No hay partidos registrados
                   </p>
                 ) : (
@@ -195,7 +195,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
                     {allMatches.map((match) => (
                       <div
                         key={match.id}
-                        className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4"
+                        className="bg-gray-900 rounded-lg p-4"
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-4 flex-1">
@@ -218,7 +218,7 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
                               <p className="font-semibold">{match.opponent.name}</p>
                             </div>
                           </div>
-                          <div className="ml-4 text-sm text-gray-600 dark:text-gray-400">
+                          <div className="ml-4 text-sm text-gray-400">
                             {format(new Date(match.matchDate), "d MMM yyyy", { locale: es })}
                           </div>
                         </div>
@@ -232,23 +232,23 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Estadísticas Generales */}
-              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+              <div className="bg-gray-800 rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold mb-4">Estadísticas</h2>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Goles a Favor</span>
                       <span className="font-bold text-green-500">{team.goalsFor}</span>
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Goles en Contra</span>
                       <span className="font-bold text-red-500">{team.goalsAgainst}</span>
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Diferencia</span>
                       <span className="font-bold">
                         {team.goalsFor - team.goalsAgainst > 0 ? "+" : ""}
@@ -256,20 +256,20 @@ export default async function TeamPage({ params }: { params: Promise<{ id: strin
                       </span>
                     </div>
                   </div>
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  <div className="border-t border-gray-700 pt-4">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Total Goles (Jugadores)</span>
                       <span className="font-bold">{totalGoals}</span>
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Total Asistencias</span>
                       <span className="font-bold">{totalAssists}</span>
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                    <div className="flex justify-between text-sm text-gray-400 mb-1">
                       <span>Total Puntos Fantasy</span>
                       <span className="font-bold text-gold-kings">{totalPoints}</span>
                     </div>

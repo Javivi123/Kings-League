@@ -79,17 +79,17 @@ export default function CreateSuspensionPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-white-kings via-white-off to-gray-100 dark:from-black-dark dark:via-gray-900 dark:to-black-kings py-8">
+      <main className="min-h-screen bg-gradient-to-br from-black-dark via-gray-900 to-black-kings py-8">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/admin/suspensions"
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>Volver a Suspensiones</span>
           </Link>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8">
             <div className="flex items-center space-x-3 mb-6">
               <AlertTriangle className="h-8 w-8 text-red-kings" />
               <h1 className="text-3xl font-bold">Crear Suspensión</h1>
@@ -97,7 +97,7 @@ export default function CreateSuspensionPage() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Jugador
                 </label>
                 <select
@@ -106,7 +106,7 @@ export default function CreateSuspensionPage() {
                     setFormData({ ...formData, playerId: e.target.value })
                   }
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-gray-700 text-white"
                 >
                   <option value="">Seleccionar jugador</option>
                   {players.map((player) => (
@@ -118,7 +118,7 @@ export default function CreateSuspensionPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Razón de la Suspensión
                 </label>
                 <textarea
@@ -129,13 +129,13 @@ export default function CreateSuspensionPage() {
                   required
                   rows={4}
                   placeholder="Describe la razón de la suspensión..."
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-gray-700 text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Número de Partidos
                   </label>
                   <input
@@ -146,11 +146,11 @@ export default function CreateSuspensionPage() {
                     }
                     required
                     min="1"
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Fecha de Inicio
                   </label>
                   <input
@@ -160,13 +160,13 @@ export default function CreateSuspensionPage() {
                       setFormData({ ...formData, startDate: e.target.value })
                     }
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-red-kings focus:border-transparent bg-gray-700 text-white"
                   />
                 </div>
               </div>
 
-              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+              <div className="bg-yellow-900/20 border border-yellow-800 rounded-lg p-4">
+                <p className="text-sm text-yellow-200">
                   <strong>Nota:</strong> La fecha de fin se calculará automáticamente basándose en el número de partidos (aproximadamente 7 días por partido).
                 </p>
               </div>
