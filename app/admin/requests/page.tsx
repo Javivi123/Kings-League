@@ -100,10 +100,10 @@ export default async function AdminRequestsPage() {
                   {requests.map((request, index) => (
                     <tr
                       key={request.id}
-                      className={`border-b border-gray-200 dark:border-gray-700 ${
+                      className={`border-b border-gray-700 ${
                         index % 2 === 0
-                          ? "bg-white dark:bg-gray-800"
-                          : "bg-gray-50 dark:bg-gray-900"
+                          ? "bg-gray-800"
+                          : "bg-gray-900"
                       }`}
                     >
                       <td className="px-6 py-4">
