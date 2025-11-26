@@ -274,7 +274,7 @@ export default async function MatchDetailPage({
                         >
                           <div className="flex-shrink-0 w-12 text-center">
                             <span className="text-sm font-bold text-gray-400">
-                              {event.minute}'
+                              {event.minute}&apos;
                             </span>
                           </div>
                           <div className={`text-2xl ${getEventColor(event.type)}`}>
