@@ -39,7 +39,7 @@ async function getDashboardData(userId: string, role: string) {
     const totalMatches = team.matchesHome.length + team.matchesAway.length;
 
     return {
-      type: "team",
+      type: "team" as const,
       data: {
         points: team.points,
         wins: team.wins,
@@ -66,7 +66,7 @@ async function getDashboardData(userId: string, role: string) {
     if (!player || !player.stats) return null;
 
     return {
-      type: "player",
+      type: "player" as const,
       data: {
         goals: player.stats.goals,
         assists: player.stats.assists,
