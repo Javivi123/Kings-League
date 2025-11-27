@@ -109,7 +109,7 @@ export default async function AgendaPage() {
                           {format(new Date(item.date), "d MMMM yyyy, HH:mm")}
                         </span>
                       </div>
-                      {item.type !== "match" && item.location && (
+                      {item.type !== "match" && "location" in item && item.location && (
                         <div className="flex items-center space-x-1">
                           <MapPin className="h-4 w-4" />
                           <span>{item.location}</span>
@@ -140,7 +140,7 @@ export default async function AgendaPage() {
                         )}
                       </div>
                     )}
-                    {item.description && (
+                    {item.type !== "match" && "description" in item && item.description && (
                       <p className="mt-2 text-gray-300">
                         {item.description}
                       </p>
